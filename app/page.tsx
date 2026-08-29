@@ -1,29 +1,24 @@
 import {
-  ArrowDownRight, ArrowRight, ArrowUpRight, CirclePlay, Clapperboard,
-  Mail, Menu, Palette, Sparkles, Video,
+  ArrowDownRight, ArrowRight, ArrowUpRight, CirclePlay, Mail, Menu,
+  MessageCircle, Palette, Sparkles, Video,
 } from 'lucide-react';
 import { ContactForm } from '@/components/contact-form';
 
 const services = [
-  { icon: Video, number: '01', title: 'Vidéos courtes', text: 'Des formats dynamiques pour présenter votre produit simplement et capter l’attention rapidement.' },
-  { icon: CirclePlay, number: '02', title: 'TikTok & Instagram', text: 'Des publicités pensées pour les codes des réseaux sociaux, sans perdre l’identité de votre startup.' },
-  { icon: Palette, number: '03', title: 'Créations visuelles', text: 'Des visuels clairs et modernes pour vos campagnes, lancements et prises de parole.' },
-  { icon: Sparkles, number: '04', title: 'Animations publicitaires', text: 'Du mouvement pour expliquer une idée, mettre un produit en valeur ou raconter une histoire.' },
-  { icon: Clapperboard, number: '05', title: 'Contenus promotionnels', text: 'Des contenus sur mesure pour faire comprendre ce que vous construisez et donner envie d’en savoir plus.' },
-];
-
-const projects = [
-  { number: '01', title: 'Votre projet ici', type: 'Vidéo produit · 15 sec', text: 'Emplacement réservé à une future publicité vidéo.', className: 'project-orange' },
-  { number: '02', title: 'Prochaine création', type: 'Social ad · Format vertical', text: 'Emplacement facilement remplaçable par une vidéo ou une image.', className: 'project-dark' },
-  { number: '03', title: 'À venir', type: 'Animation · Lancement', text: 'Une future réalisation sera présentée ici avec son contexte.', className: 'project-blue' },
-];
+  ['01', 'Publicité vidéo courte', 'Un format court pour raconter clairement votre produit ou votre idée.', Video],
+  ['02', 'TikTok / Reels', 'Un contenu vertical pensé pour les usages des réseaux sociaux.', CirclePlay],
+  ['03', 'Visuel publicitaire', 'Une image simple et forte pour présenter, lancer ou expliquer.', Palette],
+  ['04', 'Animation', 'Du mouvement pour rendre une idée ou un produit plus facile à comprendre.', Sparkles],
+  ['05', 'Présentation de startup', 'Un contenu qui aide les autres à saisir ce que vous construisez.', ArrowUpRight],
+] as const;
 
 const steps = [
-  ['01', 'On discute', 'Vous me racontez votre startup, simplement.'],
-  ['02', 'Je comprends', 'Je cherche à comprendre le produit, l’objectif et le public.'],
-  ['03', 'On choisit', 'Nous décidons ensemble du format publicitaire adapté.'],
-  ['04', 'Je crée', 'Je réalise la publicité avec une direction claire.'],
-  ['05', 'On affine', 'Nous échangeons sur le résultat et les modifications utiles.'],
+  ['01', 'Vous me racontez votre startup.', 'La première étape, c’est une vraie conversation.'],
+  ['02', 'J’essaie de comprendre.', 'Votre produit, les personnes à qui vous parlez et ce qui compte vraiment.'],
+  ['03', 'Nous trouvons ce que la pub doit raconter.', 'Une idée claire avant de parler de format ou d’effets.'],
+  ['04', 'Je crée.', 'Je transforme cette idée en vidéo, visuel ou animation.'],
+  ['05', 'Nous regardons ensemble.', 'Vous me dites ce qui fonctionne et ce qui mérite d’être amélioré.'],
+  ['06', 'Je livre la création finale.', 'Une version prête à être utilisée par votre startup.'],
 ];
 
 export default function Home() {
@@ -32,94 +27,129 @@ export default function Home() {
       <header className="site-header">
         <a className="brand" href="#accueil" aria-label="STARTUP/AD — Accueil">STARTUP<span>/</span>AD</a>
         <nav aria-label="Navigation principale">
-          <a href="#accueil">Accueil</a><a href="#creations">Créations</a><a href="#services">Services</a>
-          <a href="#a-propos">À propos</a><a href="#contact">Contact</a>
+          <a href="#a-propos">Adam</a><a href="#services">Ce que je crée</a>
+          <a href="#creations">Mon travail</a><a href="#contact">Me parler</a>
         </nav>
-        <a className="header-cta" href="#contact">Discutons <ArrowUpRight size={16} /></a>
+        <a className="header-cta" href="#contact">Parlez-moi de votre startup <ArrowUpRight size={16} /></a>
         <a className="mobile-menu" href="#contact" aria-label="Aller au contact"><Menu size={22} /></a>
       </header>
 
       <section className="hero" id="accueil">
-        <div className="hero-kicker"><span /> Création publicitaire pour startups</div>
-        <h1>Votre startup mérite une pub qui donne envie de la <em>découvrir.</em></h1>
-        <div className="hero-bottom">
-          <p>Je crée des publicités modernes et accessibles pour aider les startups à présenter leurs produits, leurs idées et leur univers.</p>
+        <div className="hero-copy">
+          <div className="kicker"><span /> Adam · 18 ans · en train de construire</div>
+          <h1>Des pubs pour ceux qui <em>construisent.</em></h1>
+          <p className="hero-personal">Moi, c’est Adam. Je crée des publicités accessibles pour les startups — et j’aime surtout rencontrer les personnes derrière les projets.</p>
           <div className="hero-actions">
-            <a className="button button-primary" href="#contact">Discuter de votre projet <ArrowUpRight size={18} /></a>
-            <a className="button button-secondary" href="#creations">Voir mes créations <ArrowDownRight size={18} /></a>
+            <a className="button button-primary" href="#contact">Parlez-moi de votre startup <ArrowUpRight size={18} /></a>
+            <a className="button button-secondary" href="#creations">Voir ce que je crée <ArrowDownRight size={18} /></a>
           </div>
+          <p className="direct-note"><MessageCircle size={18} /> Vous travaillerez directement avec moi, du premier message à la livraison.</p>
         </div>
-        <div className="hero-mark" aria-hidden="true"><span>UNE BONNE IDÉE</span><strong>MÉRITE D’ÊTRE VUE.</strong></div>
+        <div className="hero-portrait photo-placeholder" role="img" aria-label="Emplacement réservé pour une vraie photo d’Adam">
+          <span>ICI, UNE VRAIE PHOTO D’ADAM</span><strong>Salut.</strong><small>PHOTO À AJOUTER</small>
+        </div>
+        <div className="hero-note" aria-hidden="true">Je préfère apprendre<br />en faisant. ↘</div>
       </section>
 
-      <section className="section services" id="services">
-        <div className="section-heading">
-          <p className="eyebrow">01 — Ce que je propose</p>
-          <h2>Faire comprendre.<br />Donner envie. <i>Simplement.</i></h2>
-          <p className="section-intro">Des créations adaptées aux besoins réels des jeunes entreprises, avec un interlocuteur unique du premier échange à la livraison.</p>
+      <section className="intro-strip" aria-label="En bref">
+        <span>Je crée</span><b>des pubs accessibles</b><span>pour</span><b>les startups</b><span>avec</span><b>beaucoup d’écoute</b>
+      </section>
+
+      <section className="about section" id="a-propos">
+        <div className="about-aside">
+          <p className="section-index">01 / MOI, C’EST ADAM</p>
+          <div className="small-photo photo-placeholder" role="img" aria-label="Deuxième emplacement possible pour une photo d’Adam">
+            <span>PHOTO D’ADAM</span><strong>18</strong><small>ANS</small>
+          </div>
+          <p className="hand-note">Pas une équipe fictive.<br />Juste moi, pour l’instant.</p>
         </div>
-        <div className="service-grid">
-          {services.map(({ icon: Icon, number, title, text }) => (
-            <article className="service-card" key={number}>
-              <div className="card-top"><span>{number}</span><Icon size={25} strokeWidth={1.6} /></div>
-              <h3>{title}</h3><p>{text}</p>
+        <div className="about-story">
+          <h2>Je construis mon expérience entrepreneuriale <em>sur le terrain.</em></h2>
+          <div className="story-columns">
+            <p>Je me suis intéressé très jeune à l’entrepreneuriat et j’ai déjà essayé plusieurs idées. Cela m’a appris que je n’ai pas besoin de trouver immédiatement « la startup de ma vie ».</p>
+            <p>Pour le moment, je préfère construire quelque chose de simple, réel et utile. STARTUP/AD me permet de créer, de prospecter et surtout de travailler avec de vrais entrepreneurs.</p>
+          </div>
+          <blockquote>« Je suis encore au début. Je ne prétends pas tout savoir. Mais je suis là, je travaille et j’ai envie de comprendre ce que vous construisez. »</blockquote>
+          <a className="underlined-link" href="#pourquoi">Pourquoi je fais ça <ArrowDownRight size={18} /></a>
+        </div>
+      </section>
+
+      <section className="services section" id="services">
+        <div className="section-title">
+          <p className="section-index">02 / CE QUE JE PEUX CRÉER</p>
+          <h2>Une offre volontairement <em>simple.</em></h2>
+          <p>Je crée des contenus publicitaires pour aider une jeune entreprise à présenter son produit, son idée ou son univers.</p>
+        </div>
+        <div className="service-list">
+          {services.map(([number, title, text, Icon]) => (
+            <article key={number}>
+              <span>{number}</span><Icon size={24} strokeWidth={1.5} /><h3>{title}</h3><p>{text}</p>
             </article>
           ))}
-          <aside className="price-card">
-            <Sparkles size={27} /><p>Tarifs pensés pour rester accessibles aux jeunes startups.</p>
-            <a href="#contact">Demander un tarif <ArrowRight size={17} /></a>
-          </aside>
+        </div>
+        <div className="fair-price">
+          <p><b>Des tarifs raisonnables.</b> Je cherche à garder mes prestations accessibles aux startups qui n’ont pas forcément le budget d’une grosse agence.</p>
+          <a className="button button-primary" href="#contact">Parlons de votre besoin <ArrowRight size={18} /></a>
         </div>
       </section>
 
-      <section className="section creations" id="creations">
-        <div className="section-heading row-heading">
-          <div><p className="eyebrow">02 — Mes créations</p><h2>Le travail<br /><i>parle aussi.</i></h2></div>
-          <p className="section-intro">Cette galerie accueillera progressivement mes vidéos, visuels et animations. Aucun faux projet : seulement du travail réel, dès qu’il sera prêt.</p>
+      <section className="work section" id="creations">
+        <div className="section-title work-title">
+          <div><p className="section-index">03 / MON TRAVAIL</p><h2>Des créations vraies,<br /><em>au fur et à mesure.</em></h2></div>
+          <p>Je remplirai cet espace avec de vraies réalisations. Pas de faux client, pas de faux résultat, pas de projet inventé pour faire plus impressionnant.</p>
         </div>
-        <div className="project-grid">
-          {projects.map((project) => (
-            <article className="project-card" key={project.number}>
-              <div className={`project-visual ${project.className}`}>
-                <span className="placeholder-label">PLACEHOLDER — À REMPLACER</span>
-                <div className="visual-word">AD<span>/</span></div><div className="play"><CirclePlay size={44} /></div>
-              </div>
-              <div className="project-meta"><span>{project.number}</span><div><h3>{project.title}</h3><p>{project.type}</p><small>{project.text}</small></div></div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="manifesto">
-        <div className="manifesto-label">03 — Pourquoi STARTUP/AD</div>
-        <blockquote>« Aider les startups à mieux présenter ce qu’elles construisent, <em>sans forcément passer par une grosse agence.</em> »</blockquote>
-        <div className="manifesto-copy">
-          <p>STARTUP/AD est né d’une idée simple : proposer un service publicitaire accessible, direct et humain.</p>
-          <p>Je veux travailler avec les fondateurs, comprendre leur produit et créer une publicité réellement adaptée à leur projet.</p>
+        <div className="work-grid">
+          <article className="work-item work-video">
+            <div className="work-placeholder">
+              <span>EMPLACEMENT VIDÉO — À REMPLACER</span><CirclePlay size={58} /><b>Votre future réalisation</b>
+            </div>
+            <div className="work-caption"><span>01</span><div><h3>Projet à venir</h3><p>Nom du projet · objectif de la publicité · courte description</p></div></div>
+          </article>
+          <article className="work-item work-visual">
+            <div className="work-placeholder">
+              <span>EMPLACEMENT VISUEL — À REMPLACER</span><strong>AD/</strong><b>Une vraie création prendra cette place.</b>
+            </div>
+            <div className="work-caption"><span>02</span><div><h3>Création à venir</h3><p>Nom du projet · format · ce que la publicité devait raconter</p></div></div>
+          </article>
         </div>
       </section>
 
-      <section className="section about" id="a-propos">
-        <div className="portrait-placeholder" role="img" aria-label="Emplacement réservé pour une future photo d’Adam">
-          <span>VOTRE PHOTO</span><strong>ADAM</strong><small>PLACEHOLDER À REMPLACER</small>
+      <section className="why section" id="pourquoi">
+        <div className="why-heading">
+          <p className="section-index">04 / POURQUOI STARTUP/AD ?</p>
+          <h2>J’ai choisi d’aller <em>sur le terrain.</em></h2>
+          <p>Je pourrais chercher une idée de startup après l’autre, seul devant mon écran. Pour le moment, j’ai choisi autre chose : créer un service concret et aller rencontrer les personnes qui entreprennent vraiment.</p>
         </div>
-        <div className="about-copy">
-          <p className="eyebrow">04 — Qui suis-je ?</p>
-          <h2>Moi, c’est <i>Adam.</i></h2>
-          <p className="lead">J’ai 18 ans et je développe STARTUP/AD avec l’envie de construire mon expérience directement sur le terrain.</p>
-          <div className="about-columns">
-            <p>Je suis passionné par l’entrepreneuriat, curieux de comprendre comment naissent les projets et motivé par le travail aux côtés de celles et ceux qui les portent.</p>
-            <p>Je ne prétends pas tout savoir. Je préfère apprendre en faisant, progresser à chaque création et être transparent dans mes échanges.</p>
-          </div>
-          <div className="traits"><span>Ambitieux</span><span>Curieux</span><span>Sérieux</span><span>En apprentissage</span></div>
-          <a className="text-link" href="#contact">Venez me parler de votre idée <ArrowUpRight size={18} /></a>
+        <div className="field-path" aria-label="Mon parcours d’apprentissage">
+          <div><span>01</span><b>Créer</b><small>faire quelque chose de réel</small></div>
+          <ArrowRight aria-hidden="true" />
+          <div><span>02</span><b>Prospecter</b><small>oser aller vers les autres</small></div>
+          <ArrowRight aria-hidden="true" />
+          <div><span>03</span><b>Rencontrer</b><small>écouter des fondateurs</small></div>
+          <ArrowRight aria-hidden="true" />
+          <div><span>04</span><b>Comprendre</b><small>voir les vrais problèmes</small></div>
+          <ArrowRight aria-hidden="true" />
+          <div><span>05</span><b>Progresser</b><small>construire la suite</small></div>
+        </div>
+        <p className="why-close">STARTUP/AD est mon moyen de faire tout cela tout en apportant une vraie prestation aux startups avec lesquelles je travaille.</p>
+      </section>
+
+      <section className="learning">
+        <div className="learning-statement">
+          <p className="section-index">05 / APPRENDRE EN FAISANT</p>
+          <h2>Je construis autant mon expérience que <em>mon entreprise.</em></h2>
+        </div>
+        <div className="learning-copy">
+          <p>Une mission reste d’abord une vraie prestation : vous me confiez une publicité, je m’engage à la créer sérieusement.</p>
+          <p>Mais derrière STARTUP/AD, j’ai aussi une motivation personnelle : chaque échange m’aide à mieux comprendre la publicité, la vente, les produits, les clients et la réalité des entrepreneurs.</p>
+          <div className="learning-tags"><span>Publicité</span><span>Vente</span><span>Startups</span><span>Produits</span><span>Entrepreneurs</span><span>Clients</span></div>
         </div>
       </section>
 
-      <section className="section process">
-        <div className="section-heading row-heading">
-          <div><p className="eyebrow">05 — Ma façon de travailler</p><h2>Simple, proche,<br /><i>sans détour.</i></h2></div>
-          <p className="section-intro">Pas de tunnel compliqué. Nous avançons ensemble, avec des échanges clairs à chaque étape.</p>
+      <section className="process section">
+        <div className="section-title process-title">
+          <div><p className="section-index">06 / COMMENT ON TRAVAILLE</p><h2>Tout commence par<br /><em>une conversation.</em></h2></div>
+          <p>Pas besoin d’un brief parfait. Je commence par vous écouter, puis nous avançons étape par étape.</p>
         </div>
         <ol className="steps">
           {steps.map(([number, title, text]) => <li key={number}><span>{number}</span><h3>{title}</h3><p>{text}</p><ArrowDownRight size={22} /></li>)}
@@ -128,23 +158,24 @@ export default function Home() {
 
       <section className="contact" id="contact">
         <div className="contact-copy">
-          <p className="eyebrow">06 — Contact</p>
-          <h2>Vous construisez une startup ? <i>Parlons-en.</i></h2>
-          <p>Même si vous n’avez pas encore une idée précise de la publicité dont vous avez besoin, vous pouvez simplement venir discuter de votre projet avec moi.</p>
+          <p className="section-index">07 / VENEZ ME PARLER</p>
+          <h2>Vous construisez quelque chose ? <em>Racontez-moi.</em></h2>
+          <p>Vous n’avez pas besoin d’arriver avec un brief marketing de dix pages. Présentez-moi simplement votre startup, votre produit et ce que vous essayez de faire.</p>
+          <p className="no-pressure">Et si mon service n’est pas pertinent tout de suite, nous aurons quand même eu une bonne conversation.</p>
           <div className="contact-links">
             <a href="mailto:VOTRE-EMAIL@EXEMPLE.COM"><Mail size={18} /> Email à configurer <ArrowUpRight size={16} /></a>
             <a href="#" aria-label="LinkedIn à configurer"><b aria-hidden="true">in</b> LinkedIn <span>À CONFIGURER</span></a>
-            <a href="#" aria-label="Instagram à configurer"><b aria-hidden="true">@</b> Instagram <span>À CONFIGURER</span></a>
+            <a href="#" aria-label="Autre réseau à configurer"><b aria-hidden="true">@</b> Autre réseau <span>À CONFIGURER</span></a>
           </div>
         </div>
         <ContactForm />
       </section>
 
       <footer>
-        <div className="footer-brand"><a className="brand" href="#accueil">STARTUP<span>/</span>AD</a><p>Création publicitaire pour startups.</p></div>
-        <div><strong>Navigation</strong><a href="#services">Services</a><a href="#creations">Créations</a><a href="#a-propos">À propos</a><a href="#contact">Contact</a></div>
+        <div className="footer-brand"><a className="brand" href="#accueil">STARTUP<span>/</span>AD</a><p>Adam crée des publicités accessibles pour les startups.</p></div>
+        <div><strong>Sur cette page</strong><a href="#a-propos">Qui je suis</a><a href="#services">Ce que je crée</a><a href="#creations">Mon travail</a><a href="#contact">Me parler</a></div>
         <div><strong>Informations</strong><a href="/mentions-legales">Mentions légales — à compléter</a><a href="/confidentialite">Confidentialité — à compléter</a><span>Email — à configurer</span></div>
-        <div className="footer-bottom"><span>© {new Date().getFullYear()} STARTUP/AD</span><span>Construit avec ambition par Adam.</span></div>
+        <div className="footer-bottom"><span>© {new Date().getFullYear()} STARTUP/AD</span><span>Adam · 18 ans · j’apprends en faisant.</span></div>
       </footer>
     </main>
   );
