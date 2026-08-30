@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { useState, type SyntheticEvent } from 'react';
 import { ArrowUpRight, CheckCircle2, LoaderCircle, TriangleAlert } from 'lucide-react';
 
 type FormStatus = 'idle' | 'sending' | 'success' | 'error';
@@ -8,7 +8,7 @@ type FormStatus = 'idle' | 'sending' | 'success' | 'error';
 export function ContactForm() {
   const [status, setStatus] = useState<FormStatus>('idle');
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: SyntheticEvent<HTMLFormElement, SubmitEvent>) {
     event.preventDefault();
     setStatus('sending');
 
@@ -16,14 +16,10 @@ export function ContactForm() {
     const data = Object.fromEntries(new FormData(form).entries());
 
     try {
-      const response = await fetch('https://formsubmit.co/ajax/adam.mare08@gmail.com', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          ...data,
-          _subject: `Nouveau message STARTUP/AD — ${data.startup || data.firstName}`,
-          _template: 'table',
-        }),
+        body: JSON.stringify(data),
       });
 
       if (!response.ok) throw new Error('Form submission failed');
@@ -35,12 +31,12 @@ export function ContactForm() {
   }
 
   if (status === 'success') return (
-    <div className="form-success" role="status">
+    <output className="form-success">
       <CheckCircle2 size={38} />
-      <h3>Votre message a bien été envoyé à Adam.</h3>
-      <p>Merci pour votre message. Adam pourra vous répondre directement à l’adresse indiquée.</p>
+      <h3>Merci ! J’ai bien reçu votre message.</h3>
+      <p>Je vous répondrai dès que possible.</p>
       <button type="button" onClick={() => setStatus('idle')}>Envoyer un autre message</button>
-    </div>
+    </output>
   );
 
   return (
@@ -58,10 +54,10 @@ export function ContactForm() {
         <label>Budget approximatif <span>(facultatif)</span><input name="budget" placeholder="Une fourchette suffit" /></label>
       </div>
       {status === 'error' && (
-        <p className="form-error" role="alert"><TriangleAlert size={17} /> Le message n’a pas pu être envoyé. Réessayez ou écrivez directement à adam.mare08@gmail.com.</p>
+        <p className="form-error" role="alert"><TriangleAlert size={17} /> Le message n’a pas pu être envoyé. Réessayez dans quelques instants.</p>
       )}
       <button className="submit-button" type="submit" disabled={status === 'sending'}>
-        {status === 'sending' ? <><LoaderCircle className="spinner" size={18} /> Envoi en cours…</> : <>Envoyer à Adam <ArrowUpRight size={18} /></>}
+        {status === 'sending' ? <><LoaderCircle className="spinner" size={18} /> Envoi…</> : <>Envoyer à Adam <ArrowUpRight size={18} /></>}
       </button>
       <small>Vos informations sont uniquement utilisées pour répondre à votre demande.</small>
     </form>
