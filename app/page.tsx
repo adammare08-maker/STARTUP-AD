@@ -163,7 +163,7 @@ export default function Home() {
           <p>Vous n’avez pas besoin d’arriver avec un brief marketing de dix pages. Présentez-moi simplement votre startup, votre produit et ce que vous essayez de faire.</p>
           <p className="no-pressure">Et si mon service n’est pas pertinent tout de suite, nous aurons quand même eu une bonne conversation.</p>
           <div className="contact-links">
-            <a href="mailto:VOTRE-EMAIL@EXEMPLE.COM"><Mail size={18} /> Email à configurer <ArrowUpRight size={16} /></a>
+            <a href="mailto:adam.mare08@gmail.com"><Mail size={18} /> adam.mare08@gmail.com <ArrowUpRight size={16} /></a>
             <a href="#" aria-label="LinkedIn à configurer"><b aria-hidden="true">in</b> LinkedIn <span>À CONFIGURER</span></a>
             <a href="#" aria-label="Autre réseau à configurer"><b aria-hidden="true">@</b> Autre réseau <span>À CONFIGURER</span></a>
           </div>
@@ -174,7 +174,7 @@ export default function Home() {
       <footer>
         <div className="footer-brand"><a className="brand" href="#accueil">STARTUP<span>/</span>AD</a><p>Adam crée des publicités accessibles pour les startups.</p></div>
         <div><strong>Sur cette page</strong><a href="#a-propos">Qui je suis</a><a href="#services">Ce que je crée</a><a href="#creations">Mon travail</a><a href="#contact">Me parler</a></div>
-        <div><strong>Informations</strong><a href="/mentions-legales">Mentions légales — à compléter</a><a href="/confidentialite">Confidentialité — à compléter</a><span>Email — à configurer</span></div>
+        <div><strong>Informations</strong><a href="/mentions-legales">Mentions légales — à compléter</a><a href="/confidentialite">Confidentialité</a><a href="mailto:adam.mare08@gmail.com">adam.mare08@gmail.com</a></div>
         <div className="footer-bottom"><span>© {new Date().getFullYear()} STARTUP/AD</span><span>Adam · 18 ans · j’apprends en faisant.</span></div>
       </footer>
     </main>
