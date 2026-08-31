@@ -45,8 +45,9 @@ export default function Home() {
           </div>
           <p className="direct-note"><MessageCircle size={18} /> Vous travaillerez directement avec moi, du premier message à la livraison.</p>
         </div>
-        <div className="hero-portrait photo-placeholder" role="img" aria-label="Emplacement réservé pour une vraie photo d’Adam">
-          <span>ICI, UNE VRAIE PHOTO D’ADAM</span><strong>Salut.</strong><small>PHOTO À AJOUTER</small>
+        <div className="hero-portrait portrait-frame">
+          <img src="/images/adam-portrait.png" alt="Adam, créateur de STARTUP/AD" width={1254} height={1254} fetchPriority="high" />
+          <span className="portrait-label">Moi, c’est Adam.</span>
         </div>
         <div className="hero-note" aria-hidden="true">Je préfère apprendre<br />en faisant. ↘</div>
       </section>
@@ -58,8 +59,8 @@ export default function Home() {
       <section className="about section" id="a-propos">
         <div className="about-aside">
           <p className="section-index">01 / MOI, C’EST ADAM</p>
-          <div className="small-photo photo-placeholder" role="img" aria-label="Deuxième emplacement possible pour une photo d’Adam">
-            <span>PHOTO D’ADAM</span><strong>18</strong><small>ANS</small>
+          <div className="small-photo portrait-frame">
+            <img src="/images/adam-portrait.png" alt="Portrait d’Adam" width={1254} height={1254} loading="lazy" decoding="async" />
           </div>
           <p className="hand-note">Pas une équipe fictive.<br />Juste moi, pour l’instant.</p>
         </div>

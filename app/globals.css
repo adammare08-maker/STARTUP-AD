@@ -19,9 +19,9 @@ h1 { max-width:940px; margin:3.5vh 0 4vh; font-size:clamp(4rem,7vw,7.6rem); line
 .hero-actions { display:flex; gap:.75rem; flex-wrap:wrap; }.button { min-height:52px; padding:0 1.25rem; border:1px solid var(--ink); transition:transform .2s,background .2s,color .2s; }.button:hover { transform:translateY(-3px); }
 .button-primary { background:var(--ink); color:white; }.button-primary:hover { background:var(--orange); border-color:var(--orange); }.button-secondary:hover { background:white; }
 .direct-note { display:flex; gap:.65rem; align-items:center; max-width:540px; margin:2.3rem 0 0; padding-top:1rem; border-top:1px solid var(--line); font-size:.78rem; color:#66625b; }
-.photo-placeholder { background:var(--blue); border:1px solid var(--ink); display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; overflow:hidden; }
-.photo-placeholder::before { content:''; position:absolute; width:78%; aspect-ratio:1; border:1px solid rgba(29,28,25,.25); border-radius:50%; }
-.photo-placeholder span,.photo-placeholder small { position:absolute; left:1.2rem; font:650 .57rem/1 var(--font-mono); letter-spacing:.1em; }.photo-placeholder span { top:1.2rem; }.photo-placeholder small { bottom:1.2rem; }
+.portrait-frame { background:var(--blue); border:1px solid var(--ink); position:relative; overflow:hidden; display:flex; align-items:flex-end; }
+.portrait-frame img { display:block; width:100%; height:100%; object-fit:contain; object-position:center bottom; }
+.portrait-label { position:absolute; top:1.2rem; left:1.2rem; padding:.65rem .9rem; background:var(--yellow); color:var(--ink); font:700 .8rem/1.2 var(--font-mono); transform:rotate(-3deg); }
 .photo-placeholder strong { z-index:1; letter-spacing:-.08em; }.hero-portrait { aspect-ratio:4/5; width:100%; transform:rotate(2deg); box-shadow:12px 12px 0 var(--yellow); }.hero-portrait strong { font-size:clamp(3rem,6vw,6rem); transform:rotate(-8deg); }
 .hero-note { position:absolute; right:38%; bottom:4%; background:var(--orange); color:white; padding:1rem 1.2rem; transform:rotate(-5deg); font:700 .74rem/1.35 var(--font-mono); }
 .intro-strip { min-height:95px; padding:1rem 4vw; background:var(--ink); color:white; display:flex; gap:1rem 1.6rem; align-items:center; justify-content:center; flex-wrap:wrap; font-size:clamp(1rem,1.6vw,1.35rem); }.intro-strip span { color:#999; }.intro-strip b { font-weight:650; }.intro-strip b::after { content:'↗'; color:var(--orange); margin-left:.5rem; }
