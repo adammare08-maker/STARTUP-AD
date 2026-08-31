@@ -96,14 +96,15 @@ export default function Home() {
       <section className="work section" id="creations">
         <div className="section-title work-title">
           <div><p className="section-index">03 / MON TRAVAIL</p><h2>Des créations vraies,<br /><em>au fur et à mesure.</em></h2></div>
-          <p>Je remplirai cet espace avec de vraies réalisations. Pas de faux client, pas de faux résultat, pas de projet inventé pour faire plus impressionnant.</p>
+          <p>Voici ma première publicité, créée par moi-même avec Canva. Un premier pas concret dans mon parcours : apprendre en faisant, puis continuer à progresser.</p>
         </div>
         <div className="work-grid">
           <article className="work-item work-video">
-            <div className="work-placeholder">
-              <span>EMPLACEMENT VIDÉO — À REMPLACER</span><CirclePlay size={58} /><b>Votre future réalisation</b>
-            </div>
-            <div className="work-caption"><span>01</span><div><h3>Projet à venir</h3><p>Nom du projet · objectif de la publicité · courte description</p></div></div>
+            <video className="portfolio-video" controls playsInline preload="metadata" poster="/videos/premiere-publicite-canva.jpg" aria-label="Ma première publicité, créée par moi-même avec Canva">
+              <source src="/videos/premiere-publicite-canva.mp4" type="video/mp4" />
+              Votre navigateur ne permet pas de lire cette vidéo. <a href="/videos/premiere-publicite-canva.mp4">Ouvrir ma première publicité</a>.
+            </video>
+            <div className="work-caption"><span>01</span><div><h3>Ma première publicité</h3><p>Date Rencontre Express · Vidéo verticale · Créée par moi-même avec Canva.</p><p>Une vidéo pour présenter l’application et son idée. Je la partage ici comme le début de mon travail, avec l’envie de créer, de tester et de m’améliorer.</p></div></div>
           </article>
           <article className="work-item work-visual">
             <div className="work-placeholder">
