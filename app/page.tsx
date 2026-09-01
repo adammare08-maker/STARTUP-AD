@@ -143,7 +143,7 @@ export default function Home() {
       <section className="work section" id="creations">
         <div className="section-title work-title">
           <div><p className="section-index">05 / MON TRAVAIL</p><h2>Des créations vraies,<br /><em>au fur et à mesure.</em></h2></div>
-          <p>Voici ma première publicité, créée par moi-même avec Canva. Un premier pas concret dans mon parcours : apprendre en faisant, puis continuer à progresser.</p>
+          <p>Je partage ici mes créations personnelles au fur et à mesure : des projets concrets pour présenter des idées, tester des formats et continuer à progresser.</p>
         </div>
         <div className="work-grid">
           <article className="work-item work-video">
@@ -154,10 +154,11 @@ export default function Home() {
             <div className="work-caption"><span>01</span><div><h3>Ma première publicité</h3><p>Date Rencontre Express · Vidéo verticale · Créée par moi-même avec Canva.</p><p>Une vidéo pour présenter l’application et son idée. Je la partage ici comme le début de mon travail, avec l’envie de créer, de tester et de m’améliorer.</p></div></div>
           </article>
           <article className="work-item work-visual">
-            <div className="work-placeholder">
-              <span>EMPLACEMENT VISUEL — À REMPLACER</span><strong>AD/</strong><b>Une vraie création prendra cette place.</b>
-            </div>
-            <div className="work-caption"><span>02</span><div><h3>Création à venir</h3><p>Nom du projet · format · ce que la publicité devait raconter</p></div></div>
+            <video className="portfolio-video" controls playsInline preload="metadata" poster="/videos/presentation-animee-startup-ad.jpg" aria-label="Présentation animée de mon service STARTUP/AD">
+              <source src="/videos/presentation-animee-startup-ad.mp4" type="video/mp4" />
+              Votre navigateur ne permet pas de lire cette vidéo. <a href="/videos/presentation-animee-startup-ad.mp4">Ouvrir la présentation animée de STARTUP/AD</a>.
+            </video>
+            <div className="work-caption"><span>02</span><div><h3>Présentation animée de STARTUP/AD</h3><p>Création personnelle · Vidéo verticale animée.</p><p>Je lance <strong>STARTUP/AD</strong>, mon service de création de publicités pour les startups. 🚀<br />Mon objectif : créer, rencontrer des entrepreneurs et évoluer à leurs côtés.</p></div></div>
           </article>
         </div>
       </section>
