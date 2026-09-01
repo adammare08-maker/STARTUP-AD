@@ -8,10 +8,10 @@ const mono = Geist_Mono({ variable: '--font-mono', subsets: ['latin'] });
 export const metadata: Metadata = {
   metadataBase: new URL('https://startup-ad-adam.adam-mare08.chatgpt.site'),
   title: 'STARTUP/AD — Des pubs pour ceux qui construisent',
-  description: 'Moi, c’est Adam, j’ai 18 ans. Je crée des publicités accessibles pour les startups et je préfère apprendre en faisant.',
+  description: 'Adam crée des publicités pour les startups. Sa méthode commence par rencontrer et comprendre les personnes derrière les projets.',
   openGraph: {
     title: 'STARTUP/AD — Des pubs pour ceux qui construisent',
-    description: 'Adam, 18 ans : des publicités accessibles pour les startups, avec une approche directe et humaine.',
+    description: 'Prospecter, rencontrer, comprendre, proposer et créer : une approche publicitaire directe et humaine pour les startups.',
     type: 'website',
     locale: 'fr_FR',
     images: [{ url: 'https://startup-ad-adam.adam-mare08.chatgpt.site/og.png', width: 1200, height: 630, alt: 'STARTUP/AD — Des pubs pour ceux qui construisent' }],
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'STARTUP/AD — Des pubs pour ceux qui construisent',
-    description: 'Adam, 18 ans : des publicités accessibles pour les startups, avec une approche directe et humaine.',
+    description: 'Prospecter, rencontrer, comprendre, proposer et créer : une approche publicitaire directe et humaine pour les startups.',
     images: ['https://startup-ad-adam.adam-mare08.chatgpt.site/og.png'],
   },
 };

@@ -1,6 +1,6 @@
 import {
   ArrowDownRight, ArrowRight, ArrowUpRight, CirclePlay, Mail, Menu,
-  MessageCircle, Palette, Sparkles, Video,
+  MessageCircle, Palette, Sparkles, Video, Search, Users, Lightbulb, PencilLine,
 } from 'lucide-react';
 import { ContactForm } from '@/components/contact-form';
 
@@ -21,13 +21,30 @@ const steps = [
   ['06', 'Je livre la création finale.', 'Une version prête à être utilisée par votre startup.'],
 ];
 
+const phases = [
+  ['01', 'Prospecter', 'Oser aller vers les autres.', 'Je recherche des entrepreneurs, je vais vers eux et je présente STARTUP/AD. Prospecter m’apprend aussi à parler de mon travail, à recevoir des refus et à progresser.', Search],
+  ['02', 'Rencontrer', 'Découvrir la personne derrière la startup.', 'Un prospect n’est pas seulement un client potentiel. C’est un fondateur ou une fondatrice avec une histoire, une ambition et une vision. Je veux d’abord rencontrer cette personne.', Users],
+  ['03', 'Comprendre', 'Aller au fond du projet.', 'Je ne veux pas créer une publicité sans comprendre ce qu’il y a derrière : le problème, le public, la philosophie et ce que le projet veut faire ressentir.', MessageCircle],
+  ['04', 'Proposer', 'Transformer l’écoute en direction claire.', 'Si mon service peut réellement être utile, je propose une prestation claire. Nous définissons ensemble le format, le besoin, le prix, le délai et les attentes.', Lightbulb],
+  ['05', 'Créer', 'Créer avec l’entrepreneur.', 'Je crée à partir de ce que j’ai compris. Je présente le résultat, j’écoute les retours et nous l’améliorons ensemble avant la livraison finale.', PencilLine],
+] as const;
+
+const questions = [
+  'Pourquoi cette startup existe-t-elle ?',
+  'Quel problème cherche-t-elle à résoudre ?',
+  'Pour qui ?',
+  'Quelle est l’ambition du fondateur ?',
+  'Quelle est la philosophie du projet ?',
+  'Que doit comprendre ou ressentir le public ?',
+];
+
 export default function Home() {
   return (
     <main>
       <header className="site-header">
         <a className="brand" href="#accueil" aria-label="STARTUP/AD — Accueil">STARTUP<span>/</span>AD</a>
         <nav aria-label="Navigation principale">
-          <a href="#a-propos">Adam</a><a href="#services">Ce que je crée</a>
+          <a href="#methode">Ma méthode</a><a href="#services">Ce que je crée</a>
           <a href="#creations">Mon travail</a><a href="#contact">Me parler</a>
         </nav>
         <a className="header-cta" href="#contact">Parlez-moi de votre startup <ArrowUpRight size={16} /></a>
@@ -38,7 +55,7 @@ export default function Home() {
         <div className="hero-copy">
           <div className="kicker"><span /> Adam · 18 ans · en train de construire</div>
           <h1>Des pubs pour ceux qui <em>construisent.</em></h1>
-          <p className="hero-personal">Moi, c’est Adam. Je crée des publicités accessibles pour les startups — et j’aime surtout rencontrer les personnes derrière les projets.</p>
+          <p className="hero-personal">Je crée des publicités pour les startups. Mais avant de créer, je veux rencontrer les personnes derrière les projets et comprendre ce qu’elles construisent.</p>
           <div className="hero-actions">
             <a className="button button-primary" href="#contact">Parlez-moi de votre startup <ArrowUpRight size={18} /></a>
             <a className="button button-secondary" href="#creations">Voir ce que je crée <ArrowDownRight size={18} /></a>
@@ -53,22 +70,43 @@ export default function Home() {
       </section>
 
       <section className="intro-strip" aria-label="En bref">
-        <span>Je crée</span><b>des pubs accessibles</b><span>pour</span><b>les startups</b><span>avec</span><b>beaucoup d’écoute</b>
+        <b>Prospecter.</b><b>Rencontrer.</b><b>Comprendre.</b><b>Proposer.</b><b>Créer.</b>
+      </section>
+
+      <section className="journey section" id="methode">
+        <div className="journey-heading">
+          <p className="section-index">01 / MA MANIÈRE DE TRAVAILLER</p>
+          <h2>Une publicité commence <em>avant la création.</em></h2>
+          <p>STARTUP/AD n’est pas une boutique où l’on commande puis disparaît. Ma méthode commence par aller vers les entrepreneurs, les rencontrer et écouter ce qu’ils construisent.</p>
+        </div>
+        <ol className="phase-list">
+          {phases.map(([number, title, subtitle, text, Icon]) => (
+            <li key={number}>
+              <div className="phase-marker"><span>{number}</span><Icon size={24} strokeWidth={1.5} /></div>
+              <div><h3>{title}</h3><strong>{subtitle}</strong></div>
+              <p>{text}</p>
+            </li>
+          ))}
+        </ol>
+        <div className="understand-panel">
+          <div><span>03</span><h3>Comprendre avant de créer.</h3><p>Ce sont les questions que je veux poser avant d’ouvrir un logiciel de montage.</p></div>
+          <ul>{questions.map((question) => <li key={question}>{question}</li>)}</ul>
+        </div>
       </section>
 
       <section className="about section" id="a-propos">
         <div className="about-aside">
-          <p className="section-index">01 / MOI, C’EST ADAM</p>
+          <p className="section-index">02 / MOI, C’EST ADAM</p>
           <div className="small-photo portrait-frame">
             <img src="/images/adam-portrait.png?v=2" alt="Portrait d’Adam" width={1312} height={1199} loading="lazy" decoding="async" />
           </div>
           <p className="hand-note">Pas une équipe fictive.<br />Juste moi, pour l’instant.</p>
         </div>
         <div className="about-story">
-          <h2>Je construis mon expérience entrepreneuriale <em>sur le terrain.</em></h2>
+          <h2>Je préfère apprendre <em>en faisant.</em></h2>
           <div className="story-columns">
-            <p>Je me suis intéressé très jeune à l’entrepreneuriat et j’ai déjà essayé plusieurs idées. Cela m’a appris que je n’ai pas besoin de trouver immédiatement « la startup de ma vie ».</p>
-            <p>Pour le moment, je préfère construire quelque chose de simple, réel et utile. STARTUP/AD me permet de créer, de prospecter et surtout de travailler avec de vrais entrepreneurs.</p>
+            <p>Je développe STARTUP/AD comme une activité freelance de création publicitaire destinée aux startups. Mon objectif n’est pas seulement de créer des publicités : je veux aussi rencontrer les personnes qui construisent les projets et comprendre leur vision.</p>
+            <p>Je suis au début de mon parcours entrepreneurial. Je ne prétends pas tout savoir. Je préfère apprendre sur le terrain, en créant, en prospectant et en échangeant avec ceux qui construisent.</p>
           </div>
           <blockquote>« Je suis encore au début. Je ne prétends pas tout savoir. Mais je suis là, je travaille et j’ai envie de comprendre ce que vous construisez. »</blockquote>
           <a className="underlined-link" href="#pourquoi">Pourquoi je fais ça <ArrowDownRight size={18} /></a>
@@ -77,9 +115,9 @@ export default function Home() {
 
       <section className="services section" id="services">
         <div className="section-title">
-          <p className="section-index">02 / CE QUE JE PEUX CRÉER</p>
+          <p className="section-index">03 / CE QUE JE PEUX CRÉER</p>
           <h2>Une offre volontairement <em>simple.</em></h2>
-          <p>Je crée des contenus publicitaires pour aider une jeune entreprise à présenter son produit, son idée ou son univers.</p>
+          <p>Je prends le temps de comprendre ce que vous construisez pour créer une publicité qui vous ressemble.</p>
         </div>
         <div className="service-list">
           {services.map(([number, title, text, Icon]) => (
@@ -94,9 +132,17 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="client-value section">
+        <p className="section-index">04 / CE QUE VOUS Y GAGNEZ</p>
+        <div className="client-value-grid">
+          <h2>Votre projet mérite d’être compris <em>avant d’être présenté.</em></h2>
+          <div><p className="client-lead">Une bonne publicité ne commence pas par un logiciel de montage. Elle commence par une discussion.</p><p>Je prends le temps de comprendre votre startup, votre public et ce que vous voulez réellement transmettre. Vous achetez une vraie prestation, pensée à partir de votre projet — pas un modèle générique.</p><a className="underlined-link" href="#contact">Racontez-moi votre projet <ArrowDownRight size={18} /></a></div>
+        </div>
+      </section>
+
       <section className="work section" id="creations">
         <div className="section-title work-title">
-          <div><p className="section-index">03 / MON TRAVAIL</p><h2>Des créations vraies,<br /><em>au fur et à mesure.</em></h2></div>
+          <div><p className="section-index">05 / MON TRAVAIL</p><h2>Des créations vraies,<br /><em>au fur et à mesure.</em></h2></div>
           <p>Voici ma première publicité, créée par moi-même avec Canva. Un premier pas concret dans mon parcours : apprendre en faisant, puis continuer à progresser.</p>
         </div>
         <div className="work-grid">
@@ -118,27 +164,17 @@ export default function Home() {
 
       <section className="why section" id="pourquoi">
         <div className="why-heading">
-          <p className="section-index">04 / POURQUOI STARTUP/AD ?</p>
+          <p className="section-index">06 / POURQUOI STARTUP/AD ?</p>
           <h2>J’ai choisi d’aller <em>sur le terrain.</em></h2>
-          <p>Je pourrais chercher une idée de startup après l’autre, seul devant mon écran. Pour le moment, j’ai choisi autre chose : créer un service concret et aller rencontrer les personnes qui entreprennent vraiment.</p>
+          <p>Pendant longtemps, j’ai beaucoup réfléchi à des idées de startups. Avec STARTUP/AD, je veux aussi apprendre autrement : en faisant quelque chose de concret et en travaillant directement avec des entrepreneurs.</p>
         </div>
-        <div className="field-path" aria-label="Mon parcours d’apprentissage">
-          <div><span>01</span><b>Créer</b><small>faire quelque chose de réel</small></div>
-          <ArrowRight aria-hidden="true" />
-          <div><span>02</span><b>Prospecter</b><small>oser aller vers les autres</small></div>
-          <ArrowRight aria-hidden="true" />
-          <div><span>03</span><b>Rencontrer</b><small>écouter des fondateurs</small></div>
-          <ArrowRight aria-hidden="true" />
-          <div><span>04</span><b>Comprendre</b><small>voir les vrais problèmes</small></div>
-          <ArrowRight aria-hidden="true" />
-          <div><span>05</span><b>Progresser</b><small>construire la suite</small></div>
-        </div>
+        <div className="why-verbs" aria-label="Ce que STARTUP/AD me permet de faire"><span>Créer.</span><span>Prospecter.</span><span>Rencontrer.</span><span>Écouter.</span><span>Comprendre.</span><span>Construire.</span></div>
         <p className="why-close">STARTUP/AD est mon moyen de faire tout cela tout en apportant une vraie prestation aux startups avec lesquelles je travaille.</p>
       </section>
 
       <section className="learning">
         <div className="learning-statement">
-          <p className="section-index">05 / APPRENDRE EN FAISANT</p>
+          <p className="section-index">07 / APPRENDRE EN FAISANT</p>
           <h2>Je construis autant mon expérience que <em>mon entreprise.</em></h2>
         </div>
         <div className="learning-copy">
@@ -150,7 +186,7 @@ export default function Home() {
 
       <section className="process section">
         <div className="section-title process-title">
-          <div><p className="section-index">06 / COMMENT ON TRAVAILLE</p><h2>Tout commence par<br /><em>une conversation.</em></h2></div>
+          <div><p className="section-index">08 / VOTRE PROJET, CONCRÈTEMENT</p><h2>Tout commence par<br /><em>une conversation.</em></h2></div>
           <p>Pas besoin d’un brief parfait. Je commence par vous écouter, puis nous avançons étape par étape.</p>
         </div>
         <ol className="steps">
@@ -160,9 +196,9 @@ export default function Home() {
 
       <section className="contact" id="contact">
         <div className="contact-copy">
-          <p className="section-index">07 / VENEZ ME PARLER</p>
+          <p className="section-index">09 / VENEZ ME PARLER</p>
           <h2>Vous construisez quelque chose ? <em>Racontez-moi.</em></h2>
-          <p>Vous n’avez pas besoin d’arriver avec un brief marketing de dix pages. Présentez-moi simplement votre startup, votre produit et ce que vous essayez de faire.</p>
+          <p>Même avant de parler publicité, j’aime comprendre les projets et les personnes qui les construisent. Présentez-moi simplement votre startup, votre produit et ce que vous essayez de faire.</p>
           <p className="no-pressure">Et si mon service n’est pas pertinent tout de suite, nous aurons quand même eu une bonne conversation.</p>
           <div className="contact-links">
             <a href="mailto:adam.mare08@gmail.com"><Mail size={18} /> adam.mare08@gmail.com <ArrowUpRight size={16} /></a>

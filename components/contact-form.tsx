@@ -48,16 +48,16 @@ export function ContactForm() {
       </div>
       <label>Votre email<input type="email" name="email" placeholder="vous@startup.com" required /></label>
       <label>Site ou LinkedIn <span>(facultatif)</span><input name="website" placeholder="https://" /></label>
-      <label>Racontez-moi votre projet<textarea name="project" rows={4} placeholder="Votre startup, votre produit, ce que vous essayez de construire…" required /></label>
+      <label>Parlez-moi de votre startup<textarea name="project" rows={4} placeholder="Pourquoi elle existe, ce qu’elle construit et le problème qu’elle veut résoudre…" required /></label>
       <div className="form-row">
-        <label>Besoin publicitaire <span>(facultatif)</span><select name="adType" defaultValue=""><option value="">Je ne sais pas encore</option><option>Vidéo courte</option><option>TikTok / Reels</option><option>Création visuelle</option><option>Animation</option></select></label>
+        <label>Besoin en communication <span>(facultatif)</span><select name="adType" defaultValue=""><option value="">Je ne sais pas encore</option><option>Vidéo courte</option><option>TikTok / Reels</option><option>Création visuelle</option><option>Animation</option></select></label>
         <label>Budget approximatif <span>(facultatif)</span><input name="budget" placeholder="Une fourchette suffit" /></label>
       </div>
       {status === 'error' && (
         <p className="form-error" role="alert"><TriangleAlert size={17} /> Le message n’a pas pu être envoyé. Réessayez dans quelques instants.</p>
       )}
       <button className="submit-button" type="submit" disabled={status === 'sending'}>
-        {status === 'sending' ? <><LoaderCircle className="spinner" size={18} /> Envoi…</> : <>Envoyer à Adam <ArrowUpRight size={18} /></>}
+        {status === 'sending' ? <><LoaderCircle className="spinner" size={18} /> Envoi…</> : <>Parler de mon projet <ArrowUpRight size={18} /></>}
       </button>
       <small>Vos informations sont uniquement utilisées pour répondre à votre demande.</small>
     </form>
