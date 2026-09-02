@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
+import { LogoutButton } from '@/components/logout-button';
 import { requireRole } from '@/lib/supabase/server';
 
 export const dynamic = 'force-dynamic';
@@ -13,5 +14,5 @@ export default async function ClientPage() {
     auth.supabase.from('missions').select('*').eq('client_id', auth.user.id).order('created_at', { ascending: false }),
     auth.supabase.from('payments').select('*').eq('client_id', auth.user.id).order('created_at', { ascending: false }),
   ]);
-  return <main className="dashboard"><header><a className="brand" href="/">STARTUP<span>/</span>AD</a><div><b>{auth.profile.first_name || auth.user.email}</b><a href="/connexion">Compte</a></div></header><section className="dashboard-head"><p className="section-index">ESPACE CLIENT</p><h1>Votre projet avec Adam.</h1><p>Retrouvez ici vos propositions, votre mission et vos paiements.</p></section><div className="dashboard-grid"><section><h2>Propositions</h2><p>{proposals?.length ? `${proposals.length} proposition(s)` : 'Aucune proposition.'}</p></section><section><h2>Missions</h2><p>{missions?.length ? `${missions.length} mission(s)` : 'Aucune mission.'}</p></section><section><h2>Paiements</h2><p>{payments?.length ? `${payments.length} paiement(s)` : 'Aucun paiement.'}</p></section></div></main>;
+  return <main className="dashboard"><header><a className="brand" href="/">STARTUP<span>/</span>AD</a><div><b>{auth.profile.first_name || auth.user.email}</b><LogoutButton /></div></header><section className="dashboard-head"><p className="section-index">ESPACE CLIENT</p><h1>Votre projet avec Adam.</h1><p>Retrouvez ici vos propositions, votre mission et vos paiements.</p></section><div className="dashboard-grid"><section><h2>Propositions</h2><p>{proposals?.length ? `${proposals.length} proposition(s)` : 'Aucune proposition.'}</p></section><section><h2>Missions</h2><p>{missions?.length ? `${missions.length} mission(s)` : 'Aucune mission.'}</p></section><section><h2>Paiements</h2><p>{payments?.length ? `${payments.length} paiement(s)` : 'Aucun paiement.'}</p></section></div></main>;
 }

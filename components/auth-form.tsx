@@ -10,17 +10,22 @@ export function AuthForm() {
 
   async function submit(event: SyntheticEvent<HTMLFormElement, SubmitEvent>) {
     event.preventDefault(); setLoading(true); setMessage('');
-    const supabase = getBrowserSupabase();
-    if (!supabase) { setMessage('Les comptes clients ne sont pas encore activés.'); setLoading(false); return; }
     const values = Object.fromEntries(new FormData(event.currentTarget));
     const email = String(values.email || ''); const password = String(values.password || '');
+    try {
+    const supabase = await getBrowserSupabase();
+    if (!supabase) { setMessage('Les comptes clients ne sont pas encore activés.'); return; }
     const result = mode === 'login'
       ? await supabase.auth.signInWithPassword({ email, password })
       : await supabase.auth.signUp({ email, password, options: { data: { first_name: String(values.firstName || '') } } });
     if (result.error) setMessage('Connexion impossible. Vérifiez les informations saisies.');
     else if (mode === 'signup') setMessage('Compte créé. Vérifiez votre email si une confirmation est demandée.');
     else window.location.assign('/client');
-    setLoading(false);
+    } catch {
+      setMessage('Connexion impossible pour le moment. Réessayez.');
+    } finally {
+      setLoading(false);
+    }
   }
 
   return <form className="auth-form" onSubmit={submit}>

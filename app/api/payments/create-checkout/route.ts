@@ -8,7 +8,11 @@ export async function POST(request:Request){
   if(!secret||!siteUrl) return Response.json({ok:false,message:'Paiement non configuré.'},{status:503});
   const supabase=await getServerSupabase(); if(!supabase)return Response.json({ok:false},{status:503});
   const {data:{user}}=await supabase.auth.getUser(); if(!user)return Response.json({ok:false},{status:401});
-  let missionId=''; try{missionId=String((await request.json()).missionId||'');}catch{return Response.json({ok:false},{status:400});}
+  let missionId=''; try{
+    const body: unknown = await request.json();
+    if (!body || typeof body !== 'object' || !('missionId' in body) || typeof body.missionId !== 'string') return Response.json({ok:false},{status:400});
+    missionId = body.missionId;
+  }catch{return Response.json({ok:false},{status:400});}
   const {data:mission}=await supabase.from('missions').select('id,title,price_cents,client_id').eq('id',missionId).eq('client_id',user.id).single();
   if(!mission||mission.price_cents<50)return Response.json({ok:false},{status:404});
   const stripe=new Stripe(secret);

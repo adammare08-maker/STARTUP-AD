@@ -1,8 +1,9 @@
 import { createBrowserClient } from '@supabase/ssr';
 
-export function getBrowserSupabase() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+export async function getBrowserSupabase() {
+  const response = await fetch('/api/auth/config', { cache: 'no-store' });
+  if (!response.ok) return null;
+  const { url, key } = await response.json() as { url?: string; key?: string };
   if (!url || !key) return null;
   return createBrowserClient(url, key);
 }
