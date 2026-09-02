@@ -1,8 +1,8 @@
 # Connexion Supabase — état vérifié
 
-Le déploiement Sites ne contient actuellement aucune variable Supabase.
-Le fichier `.env.local` a été préparé avec des valeurs vides : il est ignoré par Git.
-Aucune base distante, aucun compte et aucune clé n'ont été créés ou modifiés.
+Les variables Supabase sont configurées dans l’hébergement Sites. `.env.local`
+reste ignoré par Git. Le navigateur récupère uniquement l’URL et la clé publique
+via `/api/auth/config`. Les clés privées restent sur le serveur.
 
 ## Valeurs nécessaires
 
@@ -15,7 +15,15 @@ Aucune base distante, aucun compte et aucune clé n'ont été créés ou modifi�
 | SUPABASE_SERVICE_ROLE_KEY | Settings → API Keys → Secret key, ou ancienne clé service_role | Strictement secrète, côté serveur |
 
 Les noms de variables historiques sont conservés : le SDK installé accepte les nouvelles clés `sb_publishable_…` et `sb_secret_…` dans ces emplacements respectifs. Ne jamais mettre une clé secrète dans une variable NEXT_PUBLIC.
-ADMIN_EMAIL n'est pas nécessaire à l'authentification ni à la promotion : cette variable n'accorde aucun privilège et peut rester absente.
+`ADMIN_EMAIL` et `ADMIN_USER_ID` sont deux variables serveur privées : l’adresse
+confirmée d’Adam ET l’UUID de son compte Supabase existant. Les deux doivent correspondre.
+Ne jamais utiliser les métadonnées de l’inscription pour définir ces valeurs.
+
+Après connexion, `/api/auth/complete` vérifie le jeton auprès de Supabase, la
+confirmation de l’email et ces deux valeurs. Il promeut uniquement ce profil
+existant et refuse la promotion si un autre admin existe déjà. Les autres
+comptes restent clients. Il ne crée ni utilisateur ni profil artificiel.
+Une adresse saisie dans le formulaire ne suffit jamais à obtenir ce rôle.
 
 Référence : https://supabase.com/docs/guides/getting-started/api-keys
 
@@ -32,7 +40,7 @@ Ce correctif ne désactive pas RLS et ne crée aucun utilisateur. Il restreint c
 politiques pour contourner un refus d'accès.
 Référence : https://supabase.com/docs/guides/database/postgres/column-level-security
 
-## Promotion manuelle, une fois le compte créé et confirmé
+## Promotion manuelle de secours, une fois le compte créé et confirmé
 
 Dans SQL Editor, remplacer le placeholder par l'UUID exact du compte Adam
 visible dans Authentication → Users. Aucun mot de passe ni email dans le dépôt.
@@ -56,8 +64,18 @@ transmises lors de l'inscription.
 
 Après configuration : confirmation email Supabase, connexion/déconnexion, profil automatique
 client, refus admin, isolation RLS entre deux comptes de test autorisés et stockage privé.
-Sans accès au projet, ces vérifications ne sont pas réalisées et la migration 002
-n'est pas considérée comme appliquée. Ne pas annoncer le système connecté ou sécurisé en production.
+L’ouverture du formulaire d’inscription a été vérifiée dans le navigateur.
+L’existence du compte d’Adam, sa confirmation et son profil ont été vérifiés
+sans créer de compte de test en production. La connexion avec son mot de passe
+reste à effectuer par Adam ; les tests automatisés couvrent la sélection du
+vendeur, les refus d’accès et les erreurs. Ils ne remplacent pas un test réel
+du cycle inscription → email → connexion pour un nouveau client.
+
+Si un compte existe déjà, utiliser « Se connecter ». Le formulaire ne doit pas
+annoncer une nouvelle création certaine lorsque Supabase masque un doublon.
+Configurer les URL de confirmation dans Supabase Authentication → URL Configuration
+pour l’URL réelle du site avant l’ouverture publique. L’accès Sites lui-même
+reste privé : les comptes Supabase n’accordent pas un accès à cette couche externe.
 
 L'email n'est pas activé sur le déploiement observé : EMAIL_API_KEY et CONTACT_FROM_EMAIL
 sont absents. Stripe n'a pas été configuré pendant cette étape.
