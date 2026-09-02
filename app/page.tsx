@@ -47,7 +47,7 @@ export default function Home() {
           <a href="#methode">Ma méthode</a><a href="#services">Ce que je crée</a>
           <a href="#creations">Mon travail</a><a href="#contact">Me parler</a>
         </nav>
-        <a className="header-cta" href="#contact">Parlez-moi de votre startup <ArrowUpRight size={16} /></a>
+        <a className="header-cta" href="/demande">Parlez-moi de votre startup <ArrowUpRight size={16} /></a>
         <a className="mobile-menu" href="#contact" aria-label="Aller au contact"><Menu size={22} /></a>
       </header>
 

@@ -1,6 +1,8 @@
-# STARTUP/AD
+# STARTUP/AD — plateforme freelance personnelle
 
-Landing page de STARTUP/AD, construite avec TypeScript, React, Vinext et Tailwind CSS. Le formulaire utilise un endpoint privé `POST /api/contact` : aucune clé d’email n’est envoyée au navigateur et aucune base de données n’est créée.
+Site et fondation V1 de l’espace freelance personnel d’Adam, construits avec TypeScript, React, Vinext et Tailwind CSS. STARTUP/AD comporte un vendeur unique (Adam) : l’inscription publique ne peut créer que des comptes clients. Le plan V1/V2/V3 se trouve dans `docs/platform-roadmap.md`.
+
+La landing page et `POST /api/contact` restent opérationnels. La V1 ajoute une demande détaillée sans compte, une authentification client, les espaces `/admin` et `/client`, un schéma PostgreSQL protégé par RLS, Stripe Checkout et la préparation d’un stockage privé.
 
 ## Fonctionnement du formulaire
 
@@ -64,3 +66,43 @@ Le site est prévu pour OpenAI Sites et un runtime Cloudflare compatible. Ajoute
 Le prénom, la startup, l’email et les champs librement remplis sont transmis à Resend afin de remettre l’email à Adam. STARTUP/AD ne les conserve pas dans une base de données, mais le fournisseur et la boîte de réception peuvent appliquer leur propre conservation.
 
 Avant une mise en production publique, vérifiez manuellement la politique de confidentialité, les mentions légales, la durée de conservation des emails, les conditions/DPA du fournisseur, le droit de suppression et les obligations applicables à votre pays. Cette documentation technique ne constitue pas une garantie de conformité juridique.
+
+## Activer la plateforme V1
+
+### Supabase et compte Adam
+
+1. Créez un projet Supabase appartenant à Adam.
+2. Exécutez `supabase/migrations/001_startup_ad_v1.sql` dans l’éditeur SQL.
+3. Configurez `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` et la clé privée `SUPABASE_SERVICE_ROLE_KEY`.
+4. Créez le compte d’Adam, puis attribuez-lui manuellement le rôle admin :
+
+```sql
+update public.profiles
+set role = 'admin'
+where id = (select id from auth.users where email = 'EMAIL_REEL_ADAM');
+```
+
+Toutes les inscriptions publiques reçoivent automatiquement le rôle `client`. Le rôle admin n’est jamais proposé par le navigateur. Activez aussi la confirmation d’email dans Supabase Auth.
+
+### Stripe
+
+1. Créez et vérifiez le compte Stripe lié à l’activité légale d’Adam.
+2. Configurez d’abord les clés de test `STRIPE_SECRET_KEY` et `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`.
+3. Ajoutez un webhook vers `https://VOTRE_DOMAINE/api/webhooks/stripe` pour `checkout.session.completed` et `checkout.session.expired`, puis configurez `STRIPE_WEBHOOK_SECRET`.
+4. Configurez `NEXT_PUBLIC_SITE_URL` avec l’URL exacte du site et testez le passage du paiement de `en_attente` à `paye`.
+
+Les cartes restent traitées par Stripe : STARTUP/AD ne stocke aucun numéro de carte.
+
+### Variables supplémentaires
+
+Les variables Supabase et Stripe figurent dans `.env.example`. `ADMIN_EMAIL` sert de repère de configuration. Toutes les clés privées restent exclusivement côté serveur et ne doivent jamais être commitées.
+
+### Fichiers privés
+
+La migration crée le bucket privé `mission-files`. `/api/files/upload-url` contrôle la session, l’accès à la mission, le type MIME et une limite de 50 Mio avant d’autoriser un envoi. L’interface complète de livraison et l’enregistrement final des métadonnées restent volontairement dans la suite de la V1 ; le flux n’est donc pas encore activé pour les clients.
+
+### Limites assumées de cette livraison
+
+Cette livraison installe une fondation exploitable, mais les écrans complets de création/édition des propositions, le Kanban, l’acceptation interactive, la messagerie, la livraison versionnée et la génération de factures restent dans la roadmap. Les tables existent afin d’éviter une future refonte de données. Elles ne doivent pas être présentées comme des fonctionnalités déjà disponibles.
+
+Avant l’ouverture publique, vérifiez les CGV, les mentions légales, les délais et modalités de paiement, la numérotation séquentielle des factures, la franchise de TVA si applicable, les durées de conservation et les obligations françaises en vigueur. La table `invoices` ne constitue pas à elle seule un système de facturation validé. Ce projet ne garantit pas la conformité juridique ou comptable.
