@@ -12,6 +12,12 @@ button,input,textarea,select { font:inherit; }
 nav { display:flex; gap:2rem; font-size:.8rem; font-weight:650; }nav a,.header-cta,.underlined-link { transition:opacity .2s; }nav a:hover,.header-cta:hover,.underlined-link:hover { opacity:.5; }
 .header-cta,.button,.underlined-link { display:inline-flex; align-items:center; justify-content:center; gap:.55rem; font-size:.85rem; font-weight:720; }
 .header-cta,.underlined-link { border-bottom:1px solid currentColor; padding:.32rem 0; }.mobile-menu { display:none; }
+.header-actions { display:flex; align-items:center; gap:1.25rem; }
+.header-login { display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:.65rem 1rem; border:1px solid currentColor; border-radius:999px; font-size:.85rem; font-weight:720; white-space:nowrap; transition:background-color .2s; }
+.header-login:hover,.header-login:focus-visible { background:#f5e86c; }
+.header-login:focus-visible { outline:2px solid currentColor; outline-offset:4px; }
+@media(max-width:1120px){.site-header nav{display:none}}
+@media(max-width:760px){.header-actions{gap:0}.header-login{padding:.65rem .8rem;font-size:.8rem}}
 .hero { min-height:calc(100vh - 82px); max-width:1440px; margin:auto; padding:7vh 4vw 4vw; display:grid; grid-template-columns:1.25fr .75fr; gap:5vw; align-items:center; position:relative; overflow:hidden; }
 .kicker,.section-index { text-transform:uppercase; font:650 .66rem/1.25 var(--font-mono); letter-spacing:.12em; }.kicker { display:flex; align-items:center; gap:.65rem; }.kicker span { width:8px; height:8px; background:var(--orange); border-radius:50%; }
 h1 { max-width:940px; margin:3.5vh 0 4vh; font-size:clamp(4rem,7vw,7.6rem); line-height:.88; letter-spacing:-.075em; font-weight:780; }
