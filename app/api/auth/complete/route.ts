@@ -8,6 +8,7 @@ const reply = (body: object, status = 200) => Response.json(body, {
 
 // Bearer authentication: no reliance on ambient cookies or submitted role/email.
 export async function POST(request: Request) {
+  if (request.method !== 'POST') return reply({ error: 'Méthode non autorisée.' }, 405);
   try {
     const authorization = request.headers.get('authorization') ?? '';
     if (!authorization.startsWith('Bearer ') || authorization.length > 8192) return reply({ error: 'Connexion requise.' }, 401);

@@ -26,6 +26,10 @@ describe('single verified seller', () => {
     expect((await POST(new Request('https://example.test/api/auth/complete', { method: 'POST' }))).status).toBe(401);
     expect(server.getServiceSupabase).not.toHaveBeenCalled();
   });
+  it('rejects GET even when dispatched to the handler by the runtime', async () => {
+    expect((await POST(new Request('https://example.test/api/auth/complete'))).status).toBe(405);
+    expect(server.getServiceSupabase).not.toHaveBeenCalled();
+  });
   for (const scenario of ['invalid', 'unconfirmed', 'client', 'owner', 'already-admin', 'conflict', 'db-error']) {
     it(`handles ${scenario} without trusting submitted email or role`, async () => {
       vi.stubEnv('ADMIN_EMAIL', user.email); vi.stubEnv('ADMIN_USER_ID', user.id);
