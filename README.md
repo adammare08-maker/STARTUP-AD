@@ -29,7 +29,7 @@ Renseignez les valeurs réelles dans `.env.local`, qui est ignoré par Git. Ouvr
 | Variable | Rôle |
 | --- | --- |
 | `EMAIL_API_KEY` | Clé privée Resend, utilisée uniquement côté serveur |
-| `CONTACT_TO_EMAIL` | Adresse qui reçoit les demandes, prévue pour `adam.mare08@gmail.com` |
+| `CONTACT_TO_EMAIL` | Adresse privée qui reçoit les demandes, à configurer uniquement dans l’environnement serveur |
 | `CONTACT_FROM_EMAIL` | Expéditeur sur un domaine vérifié : `STARTUP/AD <contact@VOTRE_DOMAINE_VÉRIFIÉ>` |
 | `CONTACT_SEND_CONFIRMATION` | `true` pour confirmer automatiquement au prospect, sinon `false` |
 
