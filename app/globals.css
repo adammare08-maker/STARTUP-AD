@@ -104,3 +104,5 @@ footer { background:var(--ink); color:white; padding:5rem max(4vw,calc((100vw - 
   footer{grid-template-columns:1fr;gap:2.5rem;padding:4rem 5vw 2rem}.footer-bottom{grid-column:1;flex-direction:column;gap:.75rem}
   .request-page>section,.dashboard-grid{grid-template-columns:1fr}.request-copy{position:static}.request-page header{margin-bottom:4rem}.project-request-form{padding:1.25rem}.dashboard-head{padding:4rem 0 2rem}
 }
+.connected-account { display: flex; flex-direction: column; gap: .25rem; max-width: 100%; }
+.connected-account small { font-size: .875rem; overflow-wrap: anywhere; }

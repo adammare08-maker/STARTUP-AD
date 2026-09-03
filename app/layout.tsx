@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
+import { SessionRefresh } from '@/components/session-refresh';
 
 const geist = Geist({ variable: '--font-geist', subsets: ['latin'] });
 const mono = Geist_Mono({ variable: '--font-mono', subsets: ['latin'] });
@@ -25,5 +26,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="fr"><body className={`${geist.variable} ${mono.variable}`}>{children}</body></html>;
+  return <html lang="fr"><body className={`${geist.variable} ${mono.variable}`}><SessionRefresh />{children}</body></html>;
 }

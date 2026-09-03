@@ -3,6 +3,7 @@ import {
   MessageCircle, Palette, Sparkles, Video, Search, Users, Lightbulb, PencilLine,
 } from 'lucide-react';
 import { ContactForm } from '@/components/contact-form';
+import { AccountLink } from '@/components/account-link';
 
 const services = [
   ['01', 'Publicité vidéo courte', 'Un format court pour raconter clairement votre produit ou votre idée.', Video],
@@ -49,7 +50,7 @@ export default function Home() {
         </nav>
         <div className="header-actions">
           <a className="header-cta" href="/demande">Parlez-moi de votre startup <ArrowUpRight size={16} /></a>
-          <a className="header-login" href="/connexion">Se connecter</a>
+          <AccountLink />
         </div>
       </header>
 
