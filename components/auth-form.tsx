@@ -29,7 +29,11 @@ export function AuthForm() {
       const supabase = await getBrowserSupabase();
       if (!supabase) throw new Error('Unavailable');
       const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google', options: { redirectTo: `${window.location.origin}/auth/callback` },
+        provider: 'google', options: {
+          redirectTo: `${window.location.origin}/auth/callback`,
+          // Ask Google to show its account chooser, even with an active Google session.
+          queryParams: { prompt: 'select_account' },
+        },
       });
       if (error) throw new Error('Unavailable');
     } catch {
