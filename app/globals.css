@@ -13,6 +13,16 @@ nav { display:flex; gap:2rem; font-size:.8rem; font-weight:650; }nav a,.header-c
 .header-cta,.button,.underlined-link { display:inline-flex; align-items:center; justify-content:center; gap:.55rem; font-size:.85rem; font-weight:720; }
 .header-cta,.underlined-link { border-bottom:1px solid currentColor; padding:.32rem 0; }.mobile-menu { display:none; }
 .header-actions { display:flex; align-items:center; gap:1.25rem; }
+.back-home { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; min-height:44px; padding:.65rem 1rem; border:1px solid currentColor; border-radius:999px; font-size:.85rem; font-weight:700; }
+.back-home:hover,.back-home:focus-visible { background:var(--yellow); }
+.back-home:focus-visible,.password-toggle:focus-visible { outline:2px solid var(--ink); outline-offset:4px; }
+.portal-shell>.back-home { display:flex; width:fit-content; margin:1.5rem 0 2rem; }
+.dashboard>header { flex-wrap:wrap; gap:1rem; }
+.password-field { display:flex; flex-direction:column; gap:.5rem; }
+.password-control { position:relative; }
+.auth-form .password-control input { width:100%; min-width:0; padding-right:3.25rem; }
+.password-control .password-toggle { position:absolute; right:0; top:50%; transform:translateY(-50%); width:44px; height:44px; padding:0; color:var(--ink); border-radius:50%; }
+.password-control .password-toggle:hover { background:var(--yellow); }
 .header-login { display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:.65rem 1rem; border:1px solid currentColor; border-radius:999px; font-size:.85rem; font-weight:720; white-space:nowrap; transition:background-color .2s; }
 .header-login:hover,.header-login:focus-visible { background:#f5e86c; }
 .header-login:focus-visible { outline:2px solid currentColor; outline-offset:4px; }

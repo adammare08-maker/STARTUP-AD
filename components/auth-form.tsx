@@ -3,6 +3,7 @@
 import { useState, type SyntheticEvent } from 'react';
 import { getBrowserSupabase } from '@/lib/supabase/browser';
 import { authErrorMessage } from '@/lib/supabase/auth-message';
+import { PasswordField } from '@/components/password-field';
 
 export function AuthForm() {
   const [mode, setMode] = useState<'login' | 'signup'>('login');
@@ -43,7 +44,7 @@ export function AuthForm() {
     <h2>{mode === 'signup' ? 'Créer mon compte' : 'Me connecter'}</h2>
     {mode === 'signup' && <label>Prénom<input name="firstName" maxLength={80} required /></label>}
     <label>Email<input name="email" type="email" autoComplete="email" required /></label>
-    <label>Mot de passe<input name="password" type="password" minLength={mode === 'signup' ? 10 : 1} maxLength={128} autoComplete={mode === 'login' ? 'current-password' : 'new-password'} required /></label>
+    <PasswordField key={mode} mode={mode} />
     {mode === 'signup' && <small>Au moins 10 caractères. Un email vous permettra de confirmer votre adresse.</small>}
     {message && <p role="status">{message}</p>}
     <button className="submit-button" disabled={loading}>{loading ? 'Patientez…' : mode === 'login' ? 'Se connecter' : 'Créer mon compte client'}</button>
