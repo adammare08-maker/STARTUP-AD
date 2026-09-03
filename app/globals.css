@@ -13,6 +13,15 @@ nav { display:flex; gap:2rem; font-size:.8rem; font-weight:650; }nav a,.header-c
 .header-cta,.button,.underlined-link { display:inline-flex; align-items:center; justify-content:center; gap:.55rem; font-size:.85rem; font-weight:720; }
 .header-cta,.underlined-link { border-bottom:1px solid currentColor; padding:.32rem 0; }.mobile-menu { display:none; }
 .header-actions { display:flex; align-items:center; gap:1.25rem; }
+.account-identity { display:flex; align-items:center; gap:.75rem; min-width:0; max-width:100%; }
+.account-avatar { display:flex; align-items:center; justify-content:center; flex:0 0 44px; width:44px; height:44px; overflow:hidden; border:1px solid var(--ink); border-radius:50%; background:var(--yellow); font-weight:750; }
+.account-avatar img { width:100%; height:100%; object-fit:cover; }
+.account-details { display:flex; flex-direction:column; gap:.2rem; min-width:0; }
+.account-details strong { font-size:.9rem; overflow-wrap:anywhere; }
+.account-email { font-size:.8rem; color:var(--ink); overflow-wrap:anywhere; }
+.account-status { display:flex; align-items:center; gap:.35rem; font-size:.7rem; color:#426344; }
+.account-status>span { width:6px; height:6px; border-radius:50%; background:#426344; }
+.dashboard>header>.account-actions { padding:.8rem 0; max-width:100%; flex-wrap:wrap; }
 .google-login { display:flex; align-items:center; justify-content:center; min-height:48px; padding:.8rem 1rem; border:1px solid var(--ink); border-radius:999px; background:white; color:var(--ink); font-weight:700; cursor:pointer; }
 .google-login:hover,.google-login:focus-visible { background:var(--yellow); }
 .google-login:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }
