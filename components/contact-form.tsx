@@ -10,6 +10,7 @@ export function ContactForm() {
 
   async function handleSubmit(event: SyntheticEvent<HTMLFormElement, SubmitEvent>) {
     event.preventDefault();
+    if (status === 'sending') return;
     setStatus('sending');
 
     const form = event.currentTarget;
@@ -33,7 +34,7 @@ export function ContactForm() {
   if (status === 'success') return (
     <output className="form-success">
       <CheckCircle2 size={38} />
-      <h3>Merci ! J’ai bien reçu votre message.</h3>
+      <h3>Merci ! Votre demande est enregistrée dans l’espace d’Adam.</h3>
       <p>Je vous répondrai dès que possible.</p>
       <button type="button" onClick={() => setStatus('idle')}>Envoyer un autre message</button>
     </output>

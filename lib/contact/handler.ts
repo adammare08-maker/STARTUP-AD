@@ -24,6 +24,7 @@ function isSameOrigin(request: Request) {
 }
 
 type HandlerOptions = {
+  processor?: (data: import('./schema').ContactData) => Promise<{ notification: 'submitted' | 'pending' }>;
   sender?: ContactEmailSender;
   limiter?: Pick<ContactRateLimiter, 'check'>;
   settings?: EmailSettings | null;
@@ -58,6 +59,10 @@ export function createContactHandler(options: HandlerOptions = {}) {
     const rate = limiter.check(clientKey(request));
     if (!rate.allowed) return json(429, { ok: false, message: 'Trop de tentatives. Réessayez plus tard.' }, { 'Retry-After': String(rate.retryAfter) });
 
+    if (options.processor) {
+      try { return json(200, { ok: true, saved: true, ...await options.processor(parsed.data) }); }
+      catch { return json(503, { ok: false, message: 'Le message n’a pas pu être enregistré.' }); }
+    }
     const settings = options.settings === undefined ? readEmailSettings() : options.settings;
     if (!settings) return json(500, { ok: false, message: 'Le message n’a pas pu être envoyé.' });
 
