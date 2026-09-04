@@ -1,8 +1,8 @@
 import { createContactHandler } from '../../../lib/contact/handler';
 import { getServiceSupabase } from '@/lib/supabase/server';
-import { saveThenNotify } from '@/lib/contact/formsubmit';
+import { saveThenNotifyGmail } from '@/lib/contact/gmail';
 
-export const POST = createContactHandler({ processor: (data) => saveThenNotify(data, async (entry) => {
+export const POST = createContactHandler({ processor: (data) => saveThenNotifyGmail(data, async (entry) => {
   const supabase = getServiceSupabase();
   if (!supabase) throw new Error('Storage unavailable');
   // Public intake: never trust an email or a browser-supplied role as account ownership.

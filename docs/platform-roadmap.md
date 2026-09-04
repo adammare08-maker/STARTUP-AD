@@ -4,7 +4,7 @@
 
 - React 19, TypeScript, Vinext et Tailwind CSS, déployés sur OpenAI Sites/Cloudflare.
 - Landing page, profil d’Adam, portfolio vidéo et catalogue éditorial déjà présents.
-- Formulaire privé `POST /api/contact` avec validation serveur, limite de taille, honeypot, rate limiting, contrôle d’origine et envoi Resend avec `Reply-To`.
+- Formulaire privé `POST /api/contact` avec validation serveur, limite de taille, honeypot, rate limiting, contrôle d’origine, enregistrement Supabase et notification Gmail avec `Reply-To`.
 - Aucun compte, aucune base de données, aucun stockage privé et aucun paiement actuellement.
 
 ## Phase V1 — indispensable pour vendre et servir un premier client
@@ -43,7 +43,7 @@
 - Un seul vendeur : Adam. Aucun rôle vendeur ne peut être créé publiquement.
 - Supabase est prévu pour l’authentification, PostgreSQL et le stockage privé afin de disposer d’autorisations Row Level Security explicites.
 - Stripe Checkout traite les cartes ; STARTUP/AD ne reçoit ni ne stocke les numéros de carte.
-- Resend reste le canal email. Le premier contact ne nécessite pas de compte.
+- Gmail API est le canal de notification email. Le premier contact ne nécessite pas de compte.
 - Les espaces `/admin` et `/client` sont `noindex` et leurs autorisations sont contrôlées côté serveur.
 - Les informations légales, prix, numéros d’entreprise et règles de facturation restent des données à fournir et valider manuellement.
 
