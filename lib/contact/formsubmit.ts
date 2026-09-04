@@ -17,13 +17,26 @@ export async function notifyFormSubmit(data: ContactData) {
       _template: 'table', _captcha: 'false',
     }),
   });
-  const result: unknown = await response.json();
+  if (!response.ok) throw new Error(`FORMSUBMIT_HTTP_${response.status}`);
+  let result: unknown;
+  try { result = await response.json(); } catch { throw new Error('FORMSUBMIT_NON_JSON'); }
   if (!response.ok || !result || typeof result !== 'object' || !('success' in result) ||
-    ![true, 'true'].includes(result.success as boolean | string)) throw new Error('Notification unavailable');
+    ![true, 'true'].includes(result.success as boolean | string)) {
+      const message = result && typeof result === 'object' && 'message' in result ? String(result.message) : '';
+      if (/activat/i.test(message)) throw new Error('FORMSUBMIT_ACTIVATION');
+      if (/web server|HTML files/i.test(message)) throw new Error('FORMSUBMIT_ORIGIN');
+      if (/email/i.test(message)) throw new Error('FORMSUBMIT_ADDRESS');
+      throw new Error('FORMSUBMIT_REJECTED');
+    }
 }
 
 export async function saveThenNotify(data: ContactData, save: (data: ContactData) => Promise<void>, notify = notifyFormSubmit) {
   await save(data);
   try { await notify(data); return { notification: 'submitted' as const }; }
-  catch { return { notification: 'pending' as const }; }
+  catch (error) {
+    const code = error instanceof Error && /^FORMSUBMIT_(HTTP_\d{3}|NON_JSON|ACTIVATION|ORIGIN|ADDRESS|REJECTED)$/.test(error.message)
+      ? error.message : 'FORMSUBMIT_NETWORK';
+    console.warn('contact_notification', code);
+    return { notification: 'pending' as const };
+  }
 }
