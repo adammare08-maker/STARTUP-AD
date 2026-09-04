@@ -24,5 +24,7 @@ describe('durable contact and FormSubmit', () => {
     const fetcher = vi.fn().mockResolvedValue(Response.json({ success: 'true' }));vi.stubGlobal('fetch', fetcher);
     await notifyFormSubmit(data);
     expect(JSON.parse(fetcher.mock.calls[0][1].body)._replyto).toBe(data.email);
+    expect(fetcher.mock.calls[0][1].headers.Referer).toBe('https://startup-ad-adam.adam-mare08.chatgpt.site/');
+    expect(fetcher.mock.calls[0][1].headers.Origin).toBe('https://startup-ad-adam.adam-mare08.chatgpt.site');
   });
 });
