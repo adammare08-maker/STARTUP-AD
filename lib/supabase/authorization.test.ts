@@ -14,6 +14,12 @@ beforeEach(() => {
   m.create.mockReturnValue({ auth: { getUser: m.user }, from: () => ({ select: () => ({ eq: m.eq }) }) });
 });
 describe('Server authorization (no trusted browser role)', () => {
+  it('does not mistake a database outage for an account role', async () => {
+    m.user.mockResolvedValue({ data: { user: { id: 'client-id' } } });
+    m.profile.mockResolvedValue({ data: null, error: { message: 'private error' } });
+    expect((await requireRole('client')).state).toBe('unavailable');
+    expect((await requireRole('admin')).state).toBe('unavailable');
+  });
   it('rejects anonymous access to both spaces', async () => {
     m.user.mockResolvedValue({ data: { user: null } });
     expect((await requireRole('admin')).state).toBe('anonymous');

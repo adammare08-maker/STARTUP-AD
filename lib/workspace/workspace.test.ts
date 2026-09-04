@@ -3,12 +3,16 @@ const m=vi.hoisted(()=>({auth:vi.fn(),rpc:vi.fn(),single:vi.fn(),insert:vi.fn(),
 vi.mock('@/lib/supabase/server',()=>({requireRole:m.auth}));
 import { POST } from '../../app/api/workspace/route';
 import { cents, field, uuid, projectStep, type Mission } from './model';
+import { workspaceError } from './errors';
 const mid='11111111-1111-4111-8111-111111111111';
 const client='22222222-2222-4222-8222-222222222222';
 function request(body:unknown,origin='https://site.test'){return new Request('https://site.test/api/workspace',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json'},body:JSON.stringify(body)});}
 beforeEach(()=>{vi.resetAllMocks();m.rpc.mockResolvedValue({data:mid,error:null});m.single.mockResolvedValue({data:{id:mid,client_id:client},error:null});m.eq.mockReturnValue({single:m.single});m.insert.mockReturnValue({select:()=>({single:m.single})});m.auth.mockResolvedValue({state:'ready',user:{id:client},profile:{role:'client'},supabase:{rpc:m.rpc,from:()=>({select:()=>({eq:m.eq}),insert:m.insert})}});});
 it('rejects cross-origin writes before reading identity',async()=>{expect((await POST(request({},'https://evil.test'))).status).toBe(403);expect(m.auth).not.toHaveBeenCalled();});
 it('requires an authenticated account',async()=>{m.auth.mockResolvedValue({state:'anonymous'});expect((await POST(request({action:'request'}))).status).toBe(401);});
+it.each([['anonymous',401,'SESSION_REQUIRED'],['forbidden',403,'PROFILE_FORBIDDEN'],['unavailable',503,'ACCOUNT_UNAVAILABLE']])('distinguishes %s without leaking details',async(state,status,code)=>{m.auth.mockResolvedValue({state});const r=await POST(request({action:'request'}));expect(r.status).toBe(status);expect(await r.json()).toEqual({code});expect(m.rpc).not.toHaveBeenCalled();});
+it('explains an admin session instead of changing its permissions',async()=>{const a=await m.auth();a.profile.role='admin';m.auth.mockResolvedValue(a);const r=await POST(request({action:'request'}));expect(r.status).toBe(403);expect((await r.json() as {code:string}).code).toBe('CLIENT_REQUIRED');expect(m.rpc).not.toHaveBeenCalled();});
+it('only shows allowlisted client error messages',()=>{expect(workspaceError('SESSION_REQUIRED')).toContain('session');expect(workspaceError('secret database exception')).not.toContain('secret');expect(workspaceError('__proto__')).toContain('Enregistrement impossible');});
 it('bounds the actual body without trusting content-length',async()=>{expect((await POST(request({text:'x'.repeat(17000)}))).status).toBe(413);expect(m.auth).not.toHaveBeenCalled();});
 it('creates a request with server-owned identity, ignoring injected ids and roles',async()=>{const r=await POST(request({action:'request',title:'Projet',startup:'Startup',brief:'Produit',need:'Vidéo',client_id:'other',role:'admin'}));expect(r.status).toBe(200);expect(m.rpc).toHaveBeenCalledWith('workspace_request',{p_title:'Projet',p_startup:'Startup',p_brief:'Produit',p_need:'Vidéo'});});
 it('refuses client proposal creation',async()=>{expect((await POST(request({action:'propose',missionId:mid}))).status).toBe(403);expect(m.rpc).not.toHaveBeenCalled();});

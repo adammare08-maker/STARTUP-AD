@@ -3,7 +3,7 @@ const mocks = vi.hoisted(() => ({ requireRole: vi.fn(), createServerClient: vi.f
 vi.mock('@/lib/supabase/server', () => ({ requireRole: mocks.requireRole }));
 vi.mock('@supabase/ssr', () => ({ createServerClient: mocks.createServerClient }));
 import { GET } from '../../app/api/auth/session/route';
-import { middleware } from '../../middleware';
+import { middleware, config } from '../../middleware';
 import { NextRequest } from 'next/server';
 
 afterEach(() => { vi.resetAllMocks(); vi.unstubAllEnvs(); });
@@ -31,6 +31,9 @@ describe('Authenticated account navigation', () => {
 });
 
 describe('SSR session renewal', () => {
+  it('refreshes the workspace write endpoint as well as pages', () => {
+    expect(config.matcher).toContain('/api/workspace');
+  });
   it('passes rotated and removed cookies to both the page and browser', async () => {
     vi.stubEnv('NEXT_PUBLIC_SUPABASE_URL', 'https://test.supabase.co');
     vi.stubEnv('NEXT_PUBLIC_SUPABASE_ANON_KEY', 'test-public');

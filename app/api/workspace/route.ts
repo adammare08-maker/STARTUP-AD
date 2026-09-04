@@ -6,19 +6,22 @@ const limiter=new ContactRateLimiter(30,60_000);
 const response=(status:number,body:object)=>Response.json(body,{status,headers:{'Cache-Control':'private, no-store'}});
 export async function POST(request:Request) {
   try {
-    if(request.headers.get('origin')!==new URL(request.url).origin)return response(403,{error:'Requête refusée.'});
+    if(request.headers.get('origin')!==new URL(request.url).origin)return response(403,{code:'ORIGIN_REJECTED',error:'Requête refusée.'});
     if(!request.headers.get('content-type')?.startsWith('application/json'))return response(415,{error:'Requête invalide.'});
     const reader=request.body?.getReader();if(!reader)return response(400,{error:'Requête invalide.'});
     let size=0;const chunks:Uint8Array[]=[];
     while(true){const {done,value}=await reader.read();if(done)break;size+=value.length;if(size>16000){await reader.cancel();return response(413,{error:'Texte trop long.'});}chunks.push(value);}
     const bytes=new Uint8Array(size);let offset=0;for(const c of chunks){bytes.set(c,offset);offset+=c.length;}
     let body:Record<string,unknown>;try{body=JSON.parse(new TextDecoder().decode(bytes));if(!body||Array.isArray(body)||typeof body!=='object')throw new Error();}catch{return response(400,{error:'Requête invalide.'});}
-    const auth=await requireRole('client');if(auth.state!=='ready')return response(auth.state==='anonymous'?401:403,{error:'Connexion requise.'});
+    const auth=await requireRole('client');
+    if(auth.state==='anonymous')return response(401,{code:'SESSION_REQUIRED'});
+    if(auth.state==='forbidden')return response(403,{code:'PROFILE_FORBIDDEN'});
+    if(auth.state!=='ready')return response(503,{code:'ACCOUNT_UNAVAILABLE'});
     if(!limiter.check(auth.user.id).allowed)return response(429,{error:'Patientez une minute avant de réessayer.'});
     const action=body.action;let result;
     try {
       if(action==='request') {
-        if(auth.profile.role!=='client')return response(403,{error:'Ce formulaire est destiné aux comptes clients.'});
+        if(auth.profile.role!=='client')return response(403,{code:'CLIENT_REQUIRED',error:'Ce formulaire est destiné aux comptes clients.'});
         result=await auth.supabase.rpc('workspace_request',{p_title:field(body,'title',120),p_startup:field(body,'startup',120),p_brief:field(body,'brief',3000),p_need:field(body,'need',1600)});
       } else {
         if(!uuid(body.missionId))return response(400,{error:'Projet invalide.'});

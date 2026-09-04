@@ -30,7 +30,8 @@ export async function requireRole(role: 'admin' | 'client') {
   if (!supabase) return { state: 'unconfigured' as const };
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return { state: 'anonymous' as const };
-  const { data: profile } = await supabase.from('profiles').select('*').eq('id', user.id).single();
+  const { data: profile, error } = await supabase.from('profiles').select('*').eq('id', user.id).single();
+  if (error) return { state: 'unavailable' as const };
   if (!profile || (role === 'admin' ? profile.role !== 'admin' : !['client', 'admin'].includes(profile.role))) return { state: 'forbidden' as const };
   return { state: 'ready' as const, supabase, user, profile };
 }
