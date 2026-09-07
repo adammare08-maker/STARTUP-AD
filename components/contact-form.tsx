@@ -17,7 +17,7 @@ export function ContactForm() {
     });
     setPrepared(true);
   }
-  return <form className="contact-form" onSubmit={handleSubmit} aria-label="Préparer un email à Adam" aria-describedby="contact-help">
+  return <form className="contact-form" action={`mailto:${contactEmail}`} method="post" encType="text/plain" onSubmit={handleSubmit} aria-label="Préparer un email à Adam" aria-describedby="contact-help">
     <p id="contact-help">Quatre champs pour préparer votre email. Votre messagerie s’ouvrira : il vous restera à envoyer le message.</p>
     <div className="form-row">
       <label htmlFor="contact-name">Votre nom<input id="contact-name" name="name" autoComplete="name" required maxLength={100} placeholder="Ex. Léa" /></label>
