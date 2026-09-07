@@ -1,66 +1,32 @@
 'use client';
 
-import { useState, type SyntheticEvent } from 'react';
-import { ArrowUpRight, CheckCircle2, LoaderCircle, TriangleAlert } from 'lucide-react';
-
-type FormStatus = 'idle' | 'sending' | 'success' | 'error';
+import { useState, type FormEvent } from 'react';
+import { ArrowUpRight } from 'lucide-react';
+import { contactEmail, prepareContactEmail } from '@/lib/contact-message';
 
 export function ContactForm() {
-  const [status, setStatus] = useState<FormStatus>('idle');
-
-  async function handleSubmit(event: SyntheticEvent<HTMLFormElement, SubmitEvent>) {
+  const [prepared, setPrepared] = useState(false);
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (status === 'sending') return;
-    setStatus('sending');
-
-    const form = event.currentTarget;
-    const data = Object.fromEntries(new FormData(form).entries());
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) throw new Error('Form submission failed');
-      setStatus('success');
-      form.reset();
-    } catch {
-      setStatus('error');
-    }
+    const data = new FormData(event.currentTarget);
+    window.location.href = prepareContactEmail({
+      name: String(data.get('name') ?? ''),
+      email: String(data.get('email') ?? ''),
+      startup: String(data.get('startup') ?? ''),
+      message: String(data.get('message') ?? ''),
+    });
+    setPrepared(true);
   }
-
-  if (status === 'success') return (
-    <output className="form-success">
-      <CheckCircle2 size={38} />
-      <h3>Merci ! Votre demande est enregistrée dans l’espace d’Adam.</h3>
-      <p>Je vous répondrai dès que possible.</p>
-      <button type="button" onClick={() => setStatus('idle')}>Envoyer un autre message</button>
-    </output>
-  );
-
-  return (
-    <form className="contact-form" onSubmit={handleSubmit}>
-      <input type="text" name="_honey" className="honeypot" tabIndex={-1} autoComplete="off" aria-hidden="true" />
-      <div className="form-row">
-        <label>Votre prénom<input name="firstName" placeholder="Ex. Léa" required /></label>
-        <label>Nom de la startup<input name="startup" placeholder="Ex. Nova" required /></label>
-      </div>
-      <label>Votre email<input type="email" name="email" placeholder="vous@startup.com" required /></label>
-      <label>Site ou LinkedIn <span>(facultatif)</span><input name="website" placeholder="https://" /></label>
-      <label>Parlez-moi de votre startup<textarea name="project" rows={4} placeholder="Pourquoi elle existe, ce qu’elle construit et le problème qu’elle veut résoudre…" required /></label>
-      <div className="form-row">
-        <label>Besoin en communication <span>(facultatif)</span><select name="adType" defaultValue=""><option value="">Je ne sais pas encore</option><option>Vidéo courte</option><option>TikTok / Reels</option><option>Création visuelle</option><option>Animation</option></select></label>
-        <label>Budget approximatif <span>(facultatif)</span><input name="budget" placeholder="Une fourchette suffit" /></label>
-      </div>
-      {status === 'error' && (
-        <p className="form-error" role="alert"><TriangleAlert size={17} /> Le message n’a pas pu être envoyé. Réessayez dans quelques instants.</p>
-      )}
-      <button className="submit-button" type="submit" disabled={status === 'sending'}>
-        {status === 'sending' ? <><LoaderCircle className="spinner" size={18} /> Envoi…</> : <>Parler de mon projet <ArrowUpRight size={18} /></>}
-      </button>
-      <small>Vos informations sont uniquement utilisées pour répondre à votre demande.</small>
-    </form>
-  );
+  return <form className="contact-form" onSubmit={handleSubmit} aria-label="Préparer un email à Adam" aria-describedby="contact-help">
+    <p id="contact-help">Quatre champs pour préparer votre email. Votre messagerie s’ouvrira : il vous restera à envoyer le message.</p>
+    <div className="form-row">
+      <label htmlFor="contact-name">Votre nom<input id="contact-name" name="name" autoComplete="name" required maxLength={100} placeholder="Ex. Léa" /></label>
+      <label htmlFor="contact-startup">Nom de la startup <span>(facultatif)</span><input id="contact-startup" name="startup" autoComplete="organization" maxLength={120} placeholder="Ex. Nova" /></label>
+    </div>
+    <label htmlFor="contact-email">Votre email<input id="contact-email" name="email" type="email" autoComplete="email" required maxLength={254} placeholder="vous@startup.com" /></label>
+    <label htmlFor="contact-message">Votre projet / besoin<textarea id="contact-message" name="message" required rows={5} maxLength={1500} placeholder="Présentez-moi simplement votre projet et ce dont vous avez besoin." /></label>
+    <button type="submit" className="submit-button">Préparer mon email <ArrowUpRight size={18} aria-hidden="true" /></button>
+    <p role="status" aria-live="polite">{prepared ? 'Votre message est prêt à être ouvert dans votre messagerie. Il n’est pas encore envoyé : vérifiez-le puis cliquez sur Envoyer dans votre messagerie.' : ''}</p>
+    <small>Aucun envoi automatique ni enregistrement sur le site. Si votre messagerie ne s’ouvre pas, écrivez directement à <a className="underlined-link" href={`mailto:${contactEmail}`}>{contactEmail}</a>.</small>
+  </form>;
 }

@@ -3,7 +3,6 @@ import {
   MessageCircle, Palette, Sparkles, Video, Search, Users, Lightbulb, PencilLine,
 } from 'lucide-react';
 import { ContactForm } from '@/components/contact-form';
-import { AccountLink } from '@/components/account-link';
 
 const services = [
   ['01', 'Publicité vidéo courte', 'Un format court pour raconter clairement votre produit ou votre idée.', Video],
@@ -45,12 +44,12 @@ export default function Home() {
       <header className="site-header">
         <a className="brand" href="#accueil" aria-label="STARTUP/AD — Accueil">STARTUP<span>/</span>AD</a>
         <nav aria-label="Navigation principale">
-          <a href="#methode">Ma méthode</a><a href="#services">Ce que je crée</a>
-          <a href="#creations">Mon travail</a><a href="#contact">Me parler</a>
+          <a href="#accueil">Accueil</a><a href="#services">Services</a>
+          <a href="#creations">Réalisations</a><a href="#a-propos">À propos</a>
+          <a href="#pourquoi">Ma vision</a><a href="#contact">Contact</a>
         </nav>
         <div className="header-actions">
-          <a className="header-cta" href="/demande">Parlez-moi de votre startup <ArrowUpRight size={16} /></a>
-          <AccountLink />
+          <a className="header-cta" href="#contact">Parler de votre projet <ArrowUpRight size={16} /></a>
         </div>
       </header>
 
@@ -60,7 +59,7 @@ export default function Home() {
           <h1>Des pubs pour ceux qui <em>construisent.</em></h1>
           <p className="hero-personal">Je crée des publicités pour les startups. Mais avant de créer, je veux rencontrer les personnes derrière les projets et comprendre ce qu’elles construisent.</p>
           <div className="hero-actions">
-            <a className="button button-primary" href="#contact">Parlez-moi de votre startup <ArrowUpRight size={18} /></a>
+            <a className="button button-primary" href="#contact">Parler de votre projet <ArrowUpRight size={18} /></a>
             <a className="button button-secondary" href="#creations">Voir ce que je crée <ArrowDownRight size={18} /></a>
           </div>
           <p className="direct-note"><MessageCircle size={18} /> Vous travaillerez directement avec moi, du premier message à la livraison.</p>
@@ -174,6 +173,7 @@ export default function Home() {
         </div>
         <div className="why-verbs" aria-label="Ce que STARTUP/AD me permet de faire"><span>Créer.</span><span>Prospecter.</span><span>Rencontrer.</span><span>Écouter.</span><span>Comprendre.</span><span>Construire.</span></div>
         <p className="why-close">STARTUP/AD est mon moyen de faire tout cela tout en apportant une vraie prestation aux startups avec lesquelles je travaille.</p>
+        <p>Je fais évoluer STARTUP/AD à partir du terrain : travailler avec de vrais clients, rencontrer un problème, le comprendre, puis améliorer ce qui doit l’être. Pas de fonctionnalités en avance, juste ce qui aide vraiment à travailler ensemble.</p>
       </section>
 
       <section className="learning">
@@ -205,9 +205,7 @@ export default function Home() {
           <p>Même avant de parler publicité, j’aime comprendre les projets et les personnes qui les construisent. Présentez-moi simplement votre startup, votre produit et ce que vous essayez de faire.</p>
           <p className="no-pressure">Et si mon service n’est pas pertinent tout de suite, nous aurons quand même eu une bonne conversation.</p>
           <div className="contact-links">
-            <a href="#contact"><Mail size={18} /> Écrire à Adam via le formulaire <ArrowUpRight size={16} /></a>
-            <a href="#" aria-label="LinkedIn à configurer"><b aria-hidden="true">in</b> LinkedIn <span>À CONFIGURER</span></a>
-            <a href="#" aria-label="Autre réseau à configurer"><b aria-hidden="true">@</b> Autre réseau <span>À CONFIGURER</span></a>
+            <a href="mailto:startup.ad.contact@gmail.com"><Mail size={18} /> Écrire directement à Adam <ArrowUpRight size={16} /></a>
           </div>
         </div>
         <ContactForm />
