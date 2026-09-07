@@ -47,4 +47,8 @@ describe('STARTUP/AD showcase', () => {
     expect(robots).toContain('Sitemap: https://startup-ad-adam.adam-mare08.chatgpt.site/sitemap.xml');
     for (const path of ['/', '/mentions-legales', '/confidentialite']) expect(sitemap).toContain('https://startup-ad-adam.adam-mare08.chatgpt.site' + path);
   });
+
+  it('includes the Google ownership verification token in metadata', () => {
+    expect(read('app/layout.tsx')).toContain("google: 'QFWyWriQUe8Hldj4l0C9a-DVvQgLmRLKIEs705p-ZpU'");
+  });
 });

@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: 'STARTUP/AD — Des pubs pour ceux qui construisent',
   description: 'Adam crée des publicités pour les startups. Sa méthode commence par rencontrer et comprendre les personnes derrière les projets.',
   robots: { index: true, follow: true },
+  verification: {
+    google: 'QFWyWriQUe8Hldj4l0C9a-DVvQgLmRLKIEs705p-ZpU',
+  },
   openGraph: {
     title: 'STARTUP/AD — Des pubs pour ceux qui construisent',
     description: 'Prospecter, rencontrer, comprendre, proposer et créer : une approche publicitaire directe et humaine pour les startups.',
