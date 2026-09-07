@@ -1,8 +1,7 @@
 import {
-  ArrowDownRight, ArrowRight, ArrowUpRight, CirclePlay, Mail,
+  ArrowDownRight, ArrowRight, ArrowUpRight, CirclePlay,
   MessageCircle, Palette, Sparkles, Video, Search, Users, Lightbulb, PencilLine,
 } from 'lucide-react';
-import { ContactForm } from '@/components/contact-form';
 
 const services = [
   ['01', 'Publicité vidéo courte', 'Un format court pour raconter clairement votre produit ou votre idée.', Video],
@@ -46,10 +45,10 @@ export default function Home() {
         <nav aria-label="Navigation principale">
           <a href="#accueil">Accueil</a><a href="#services">Services</a>
           <a href="#creations">Réalisations</a><a href="#a-propos">À propos</a>
-          <a href="#pourquoi">Ma vision</a><a href="#contact">Contact</a>
+          <a href="#pourquoi">Ma vision</a>
         </nav>
         <div className="header-actions">
-          <a className="header-cta" href="#contact">Parler de votre projet <ArrowUpRight size={16} /></a>
+          <a className="header-cta" href="mailto:startup.ad.contact@gmail.com">Me contacter <ArrowUpRight size={16} /></a>
         </div>
       </header>
 
@@ -59,7 +58,7 @@ export default function Home() {
           <h1>Des pubs pour ceux qui <em>construisent.</em></h1>
           <p className="hero-personal">Je crée des publicités pour les startups. Mais avant de créer, je veux rencontrer les personnes derrière les projets et comprendre ce qu’elles construisent.</p>
           <div className="hero-actions">
-            <a className="button button-primary" href="#contact">Parler de votre projet <ArrowUpRight size={18} /></a>
+            <a className="button button-primary" href="mailto:startup.ad.contact@gmail.com">Me contacter <ArrowUpRight size={18} /></a>
             <a className="button button-secondary" href="#creations">Voir ce que je crée <ArrowDownRight size={18} /></a>
           </div>
           <p className="direct-note"><MessageCircle size={18} /> Vous travaillerez directement avec moi, du premier message à la livraison.</p>
@@ -130,7 +129,7 @@ export default function Home() {
         </div>
         <div className="fair-price">
           <p><b>Des tarifs raisonnables.</b> Je cherche à garder mes prestations accessibles aux startups qui n’ont pas forcément le budget d’une grosse agence.</p>
-          <a className="button button-primary" href="#contact">Parlons de votre besoin <ArrowRight size={18} /></a>
+          <a className="button button-primary" href="mailto:startup.ad.contact@gmail.com">Me contacter <ArrowRight size={18} /></a>
         </div>
       </section>
 
@@ -138,7 +137,7 @@ export default function Home() {
         <p className="section-index">04 / CE QUE VOUS Y GAGNEZ</p>
         <div className="client-value-grid">
           <h2>Votre projet mérite d’être compris <em>avant d’être présenté.</em></h2>
-          <div><p className="client-lead">Une bonne publicité ne commence pas par un logiciel de montage. Elle commence par une discussion.</p><p>Je prends le temps de comprendre votre startup, votre public et ce que vous voulez réellement transmettre. Vous achetez une vraie prestation, pensée à partir de votre projet — pas un modèle générique.</p><a className="underlined-link" href="#contact">Racontez-moi votre projet <ArrowDownRight size={18} /></a></div>
+          <div><p className="client-lead">Une bonne publicité ne commence pas par un logiciel de montage. Elle commence par une discussion.</p><p>Je prends le temps de comprendre votre startup, votre public et ce que vous voulez réellement transmettre. Vous achetez une vraie prestation, pensée à partir de votre projet — pas un modèle générique.</p><a className="underlined-link" href="mailto:startup.ad.contact@gmail.com">Écrire à Adam <ArrowDownRight size={18} /></a></div>
         </div>
       </section>
 
@@ -198,23 +197,10 @@ export default function Home() {
         </ol>
       </section>
 
-      <section className="contact" id="contact">
-        <div className="contact-copy">
-          <p className="section-index">09 / VENEZ ME PARLER</p>
-          <h2>Vous construisez quelque chose ? <em>Racontez-moi.</em></h2>
-          <p>Même avant de parler publicité, j’aime comprendre les projets et les personnes qui les construisent. Présentez-moi simplement votre startup, votre produit et ce que vous essayez de faire.</p>
-          <p className="no-pressure">Et si mon service n’est pas pertinent tout de suite, nous aurons quand même eu une bonne conversation.</p>
-          <div className="contact-links">
-            <a href="mailto:startup.ad.contact@gmail.com"><Mail size={18} /> Écrire directement à Adam <ArrowUpRight size={16} /></a>
-          </div>
-        </div>
-        <ContactForm />
-      </section>
-
       <footer>
         <div className="footer-brand"><a className="brand" href="#accueil">STARTUP<span>/</span>AD</a><p>Adam crée des publicités accessibles pour les startups.</p></div>
-        <div><strong>Sur cette page</strong><a href="#a-propos">Qui je suis</a><a href="#services">Ce que je crée</a><a href="#creations">Mon travail</a><a href="#contact">Me parler</a></div>
-        <div><strong>Informations</strong><a href="/mentions-legales">Mentions légales — à compléter</a><a href="/confidentialite">Confidentialité</a><a href="#contact">Contacter Adam</a></div>
+        <div><strong>Sur cette page</strong><a href="#a-propos">Qui je suis</a><a href="#services">Ce que je crée</a><a href="#creations">Mon travail</a><a href="#pourquoi">Ma vision</a></div>
+        <div><strong>Informations</strong><a href="/mentions-legales">Mentions légales — à compléter</a><a href="/confidentialite">Confidentialité</a><a href="mailto:startup.ad.contact@gmail.com">Écrire à Adam</a></div>
         <div className="footer-bottom"><span>© {new Date().getFullYear()} STARTUP/AD</span><span>Adam · 18 ans · j’apprends en faisant.</span></div>
       </footer>
     </main>
