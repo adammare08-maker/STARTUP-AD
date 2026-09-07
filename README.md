@@ -12,6 +12,10 @@ Pas de comptes, dashboard, CRM, paiement intégré ou messagerie privée. Princi
 
 Le formulaire à quatre champs prépare un lien mailto. Il ouvre la messagerie du visiteur, qui doit envoyer lui-même le message. Il ne prétend pas envoyer automatiquement un email et ne stocke pas les demandes. Un lien email direct est aussi disponible. Sans gestionnaire mail configuré, le visiteur peut copier l’adresse affichée dans sa messagerie web.
 
+## Référencement Google
+
+Les fichiers robots.txt et sitemap.xml autorisent l’exploration et déclarent les pages publiques. Après publication publique, ajoutez l’URL du site dans Google Search Console puis envoyez le sitemap : https://startup-ad-adam.adam-mare08.chatgpt.site/sitemap.xml. Google décide ensuite du délai et de l’indexation.
+
 ## Architecture et commandes
 
 React 19, TypeScript, Vinext/Vite, Tailwind, hébergement Sites. `npm ci`, `npm test`, `npx tsc --noEmit`, `npm run build`. `npm run dev` démarre le développement local.

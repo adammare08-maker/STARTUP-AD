@@ -39,4 +39,12 @@ describe('STARTUP/AD showcase', () => {
     expect(read('.gitignore')).toContain('.env*');
     expect(read('.env.example')).not.toMatch(/=.+/);
   });
+
+  it('provides Google crawl instructions and a sitemap', () => {
+    const robots = read('public/robots.txt');
+    const sitemap = read('public/sitemap.xml');
+    expect(robots).toContain('User-agent: *');
+    expect(robots).toContain('Sitemap: https://startup-ad-adam.adam-mare08.chatgpt.site/sitemap.xml');
+    for (const path of ['/', '/mentions-legales', '/confidentialite']) expect(sitemap).toContain('https://startup-ad-adam.adam-mare08.chatgpt.site' + path);
+  });
 });

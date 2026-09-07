@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://startup-ad-adam.adam-mare08.chatgpt.site'),
   title: 'STARTUP/AD — Des pubs pour ceux qui construisent',
   description: 'Adam crée des publicités pour les startups. Sa méthode commence par rencontrer et comprendre les personnes derrière les projets.',
+  robots: { index: true, follow: true },
   openGraph: {
     title: 'STARTUP/AD — Des pubs pour ceux qui construisent',
     description: 'Prospecter, rencontrer, comprendre, proposer et créer : une approche publicitaire directe et humaine pour les startups.',
